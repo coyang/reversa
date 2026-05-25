@@ -55,7 +55,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
 | `project` | string | Legacy project name |
 | `user_name` | string | User name (for interactions) |
 | `chat_language` | string | Interaction language (e.g., pt-br, en-us) |
-| `doc_language` | string | Language for generated specs (e.g., English, Português) |
+| `doc_language` | string | Language for generated specs (e.g., English, Portuguese) |
 | `answer_mode` | string | How the user answers gaps: `chat` or `file` |
 | `doc_level` | string \| null | Volume of generated documentation: `essencial`, `completo`, or `detalhado`. Starts as `null` — must be filled via user choice after the Scout. |
 | `output_folder` | string | Specs output folder (default: `_reversa_sdd`) |

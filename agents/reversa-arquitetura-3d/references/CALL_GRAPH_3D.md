@@ -1,30 +1,30 @@
 # Call Graph 3D
 
-Árvore (ou DAG) de **chamadas de função** explorável em 3D. Cada nó é uma função, cada aresta é uma chamada. Permite navegar a profundidade de uma cadeia de invocações partindo de pontos de entrada (endpoints, handlers, main).
+3D explorable tree (or DAG) of **function calls**. Each node is a function, and each edge is a call. It allows navigating the depth of an invocation chain starting from entry points (endpoints, handlers, main).
 
-## Mapeamento
+## Mapping
 
-| Conceito | Visual |
+| Concept | Visual |
 |---|---|
-| Função | Cápsula ou pílula 3D com label |
-| Profundidade de chamada | Posição em Z (eixo de profundidade) |
-| Função síncrona | Cápsula sólida |
-| Função assíncrona | Cápsula translúcida com partículas |
-| Função recursiva | Cápsula com brilho (emissive) |
-| Caminho quente (frequência) | Linha mais grossa, cor saturada |
-| Função externa (lib) | Cor cinza |
-| Função do projeto | Cor por pasta/módulo |
+| Function | 3D capsule or pill with label |
+| Call depth | Position on Z (depth axis) |
+| Synchronous function | Solid capsule |
+| Asynchronous function | Translucent capsule with particles |
+| Recursive function | Glowing capsule (emissive) |
+| Hot path (frequency) | Thicker line, saturated color |
+| External function (lib) | Gray color |
+| Project function | Color by folder/module |
 
-## Quando usar
+## When to Use
 
-- Entender o fluxo de execução de um endpoint específico.
-- Diagnosticar profundidade excessiva de chamadas (>15 níveis, sinal de overengineering).
-- Detectar recursão indireta.
-- Apresentar como o sistema responde a uma requisição típica.
+- Understanding the execution flow of a specific endpoint.
+- Diagnosing excessive call depth (>15 levels, a sign of overengineering).
+- Detecting indirect recursion.
+- Presenting how the system responds to a typical request.
 
-**Quando evitar**: análise estática sem dados de execução é incompleta (não captura polimorfismo). Para visão estrutural use Dependency Graph 3D.
+**When to avoid**: static analysis without execution data is incomplete (does not capture polymorphism). For a structural view, use Dependency Graph 3D.
 
-## Modelo de dados esperado
+## Expected Data Model
 
 ```json
 {
@@ -52,11 +52,11 @@
 }
 ```
 
-`weight` é frequência relativa (quantidade de invocações observadas em um período). `type` é `sync`, `async`, `recursive` ou `external`.
+`weight` is relative frequency (quantity of invocations observed over a period). `type` is `sync`, `async`, `recursive`, or `external`.
 
-## Algoritmo de layout: árvore radial 3D
+## Layout Algorithm: 3D Radial Tree
 
-Cada entrypoint vira raiz da árvore. Profundidade aumenta no eixo Z (afastando-se da câmera), funções no mesmo nível distribuem-se em um plano XY.
+Each entrypoint becomes the root of the tree. Depth increases on the Z-axis (moving away from the camera), and functions at the same level are distributed on an XY plane.
 
 ```javascript
 function layoutTree(entrypoint, calls) {
@@ -67,7 +67,7 @@ function layoutTree(entrypoint, calls) {
         const outgoing = calls.filter((c) => c.from === parentId);
         outgoing.forEach((c, i, arr) => {
             if (nodes.has(c.to)) {
-                // detectou recursão
+                // recursion detected
                 nodes.get(c.to).recursive = true;
                 return;
             }
@@ -94,9 +94,9 @@ function layoutTree(entrypoint, calls) {
 }
 ```
 
-Para múltiplos entrypoints, cada um ocupa uma região do plano XY (translação no centro), criando árvores paralelas.
+For multiple entrypoints, each occupies a region of the XY plane (translation from center), creating parallel trees.
 
-## Renderização das cápsulas
+## Capsule Rendering
 
 ```javascript
 const capsuleGeo = new THREE.CapsuleGeometry(2, 6, 8, 12);
@@ -120,11 +120,11 @@ capsules.instanceColor.needsUpdate = true;
 scene.add(capsules);
 ```
 
-`colorForCall(n)` retorna cinza para externas, cor da pasta para internas, com emissive se `n.recursive`.
+`colorForCall(n)` returns gray for external, folder color for internal, with emissive if `n.recursive`.
 
-## Renderização das chamadas (arestas)
+## Call Rendering (edges)
 
-Linhas curvas tipo bezier conectando pai a filho. Mais grossas para `weight` alto.
+Bezier-style curved lines connecting parent to child. Thicker for high `weight`.
 
 ```javascript
 calls.forEach((c) => {
@@ -153,9 +153,9 @@ calls.forEach((c) => {
 });
 ```
 
-## Animação de fluxo (opcional)
+## Flow Animation (optional)
 
-Partículas viajando ao longo das arestas, indicando que a chamada está "viva". Útil para apresentações.
+Particles traveling along edges, indicating the call is "alive". Useful for presentations.
 
 ```javascript
 function animateFlow(time) {
@@ -167,7 +167,7 @@ function animateFlow(time) {
 }
 ```
 
-## Sidebar de controles
+## Control Sidebar
 
 ```html
 <aside id="sidebar">
@@ -179,39 +179,39 @@ function animateFlow(time) {
         </select>
     </label>
 
-    <label>Profundidade máxima
+    <label>Max depth
         <input type="range" min="1" max="20" value="10" data-param="maxDepth">
     </label>
 
     <label>
-        <input type="checkbox" data-param="showAsync" checked> Destacar async
+        <input type="checkbox" data-param="showAsync" checked> Highlight async
     </label>
 
     <label>
-        <input type="checkbox" data-param="showExternal"> Mostrar libs externas
+        <input type="checkbox" data-param="showExternal"> Show external libs
     </label>
 
     <label>
-        <input type="checkbox" data-param="animateFlow"> Animar fluxo
+        <input type="checkbox" data-param="animateFlow"> Animate flow
     </label>
 
     <div id="depth-info"></div>
     <div id="recursive-warnings"></div>
 
     <button id="reset">Reset</button>
-    <button id="export-png">Exportar PNG</button>
+    <button id="export-png">Export PNG</button>
 </aside>
 ```
 
-## Interação
+## Interaction
 
-- **Hover em cápsula**: nome da função, módulo de origem, número de chamadores e chamados, tipo.
-- **Clique em cápsula**: foca câmera, destaca cadeia desde o entrypoint até essa função.
-- **Duplo clique**: expande/colapsa subárvore.
-- **Toggle entrypoint**: muda a raiz da visualização, recalcula layout.
+- **Hover on capsule**: function name, source module, number of callers and callees, type.
+- **Click on capsule**: focus camera, highlight chain from entrypoint to this function.
+- **Double click**: expand/collapse subtree.
+- **Toggle entrypoint**: changes the root of the visualization, recalculates layout.
 
 ## Performance
 
-- Limite prático: ~500 funções por entrypoint.
-- Acima disso, colapsar subárvores automaticamente após profundidade 5 e exibir botão "+N funções".
-- Animação de fluxo: limitar a 50 partículas simultâneas para não derrubar fps.
+- Practical limit: ~500 functions per entrypoint.
+- Above this, automatically collapse subtrees after depth 5 and display "+N functions" button.
+- Flow animation: limit to 50 simultaneous particles to avoid dropping fps.
