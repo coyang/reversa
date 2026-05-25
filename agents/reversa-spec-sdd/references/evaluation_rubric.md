@@ -1,113 +1,113 @@
-# Rubrica de Avaliação de Specs
+# Spec Evaluation Rubric
 
-Usada pelo `scripts/spec_scorer.py` e como guia de revisão manual.
+Used by `scripts/spec_scorer.py` and as a manual review guide.
 
-Score total: **0–100 pontos**
-
----
-
-## Dimensão 1: Completude (30 pontos)
-
-Avalia se todas as seções essenciais estão presentes e preenchidas.
-
-| Critério | Pontos | Como verificar |
-|----------|--------|----------------|
-| Seções 1–6 todas presentes e preenchidas (não apenas headers) | 10 | Cada seção tem ≥ 2 frases ou 1 item de lista |
-| Requisitos funcionais com IDs (RF-XX) | 8 | Pelo menos 3 requisitos numerados |
-| Critérios de aceite definidos para cada RF Must | 7 | Coluna "Critério de Aceite" preenchida |
-| Non-Goals explícitos (seção 4) | 5 | Pelo menos 2 non-goals listados |
-
-**Penalidades:**
-- Seção obrigatória completamente ausente: -5 por seção
-- Seção com placeholder não preenchido (`[colchetes]`): -2 por ocorrência
+Total score: **0–100 points**
 
 ---
 
-## Dimensão 2: Testabilidade (25 pontos)
+## Dimension 1: Completeness (30 points)
 
-Avalia se um QA consegue escrever testes a partir da spec sem fazer perguntas.
+Evaluates whether all essential sections are present and filled in.
 
-| Critério | Pontos | Como verificar |
-|----------|--------|----------------|
-| Requisitos usam verbos concretos e mensuráveis | 10 | Ausência de "deve ser bom", "deve ser rápido", "deve ser intuitivo" |
-| Fluxo principal (happy path) descrito passo a passo | 8 | Seção 6.2 com ≥ 3 passos |
-| Métricas de sucesso com valores numéricos | 7 | Seção 3 tem pelo menos 1 métrica com target numérico |
+| Criterion | Points | How to verify |
+|-----------|--------|---------------|
+| Sections 1–6 all present and filled in (not just headers) | 10 | Each section has ≥ 2 sentences or 1 list item |
+| Functional requirements with IDs (RF-XX) | 8 | At least 3 numbered requirements |
+| Acceptance criteria defined for each Must RF | 7 | "Acceptance Criterion" column filled in |
+| Explicit Non-Goals (section 4) | 5 | At least 2 non-goals listed |
 
-**Penalidades:**
-- Requisito não-testável ("o sistema deve ser fácil de usar"): -3 por ocorrência
-- Happy path ausente: -8
-
----
-
-## Dimensão 3: Clareza (20 pontos)
-
-Avalia se a linguagem é precisa e não ambígua.
-
-| Critério | Pontos | Como verificar |
-|----------|--------|----------------|
-| Ausência de termos vagos sem definição | 8 | "rapidamente", "logo", "muitos", "alguns" sem valor — -2 cada |
-| Open Questions sinalizadas com ⚠️ ou na seção 14 | 6 | Ambiguidades são explícitas, não silenciosas |
-| Sujeito claro em cada requisito ("o sistema", "o usuário") | 6 | Não há requisitos sem sujeito identificado |
-
-**Penalidades:**
-- Contradição entre requisitos: -5 por contradição
-- Termo técnico sem definição para audiência não-técnica: -2 por ocorrência
+**Penalties:**
+- Mandatory section completely absent: -5 per section
+- Section with unfilled placeholder (`[brackets]`): -2 per occurrence
 
 ---
 
-## Dimensão 4: Escopo (15 pontos)
+## Dimension 2: Testability (25 points)
 
-Avalia se os limites da feature estão claros.
+Evaluates whether a QA engineer can write tests from the spec without asking questions.
 
-| Critério | Pontos | Como verificar |
-|----------|--------|----------------|
-| Seção de Non-Goals (4) clara e útil | 7 | Pelo menos 2 non-goals que previnem scope creep real |
-| Dependências e integrações mapeadas (seção 10) | 5 | Toda dependência externa está listada |
-| Plano de rollout / rollback presente (seção 13) | 3 | Estratégia e como reverter definidos |
+| Criterion | Points | How to verify |
+|-----------|--------|---------------|
+| Requirements use concrete and measurable verbs | 10 | Absence of "should be good", "should be fast", "should be intuitive" |
+| Main flow (happy path) described step by step | 8 | Section 6.2 with ≥ 3 steps |
+| Success metrics with numeric values | 7 | Section 3 has at least 1 metric with a numeric target |
 
-**Penalidades:**
-- Non-goals vagos ("funcionalidades futuras"): -2 por ocorrência
-- Dependência crítica não mapeada: -3
-
----
-
-## Dimensão 5: Edge Cases (10 pontos)
-
-Avalia se os casos difíceis foram antecipados.
-
-| Critério | Pontos | Como verificar |
-|----------|--------|----------------|
-| Pelo menos 3 edge cases listados (seção 11) | 5 | Tabela com ≥ 3 linhas preenchidas |
-| Tratamento de erro com mensagem/comportamento definido | 3 | Cada erro tem comportamento esperado |
-| Casos de falha de dependências externas cobertos | 2 | Pelo menos 1 EC para timeout/indisponibilidade |
-
-**Penalidades:**
-- Zero edge cases: -10 (esta seção zera)
-- Edge case sem comportamento definido: -1 por ocorrência
+**Penalties:**
+- Non-testable requirement ("the system should be easy to use"): -3 per occurrence
+- Happy path absent: -8
 
 ---
 
-## Classificação por Score
+## Dimension 3: Clarity (20 points)
 
-| Score | Classificação | Significado |
-|-------|--------------|-------------|
-| 90–100 | ⭐ Excelente | Pronta para implementação imediata |
-| 80–89 | ✅ Boa | Pronta com ajustes menores |
-| 65–79 | ⚠️ Adequada | Implementável mas com riscos |
-| 50–64 | 🔶 Incompleta | Precisa de revisão antes de implementar |
-| < 50 | ❌ Insuficiente | Voltar para entrevista / rascunho |
+Evaluates whether the language is precise and unambiguous.
+
+| Criterion | Points | How to verify |
+|-----------|--------|---------------|
+| Absence of vague terms without definition | 8 | "quickly", "soon", "many", "some" without a value — -2 each |
+| Open Questions flagged with ⚠️ or in section 14 | 6 | Ambiguities are explicit, not silent |
+| Clear subject in each requirement ("the system", "the user") | 6 | No requirements without an identified subject |
+
+**Penalties:**
+- Contradiction between requirements: -5 per contradiction
+- Technical term without definition for non-technical audience: -2 per occurrence
 
 ---
 
-## Checklist Rápido de Revisão
+## Dimension 4: Scope (15 points)
 
-Antes de marcar uma spec como "Aprovada", confirme:
+Evaluates whether the feature boundaries are clear.
 
-- [ ] Qualquer dev pode implementar sem perguntar nada?
-- [ ] Qualquer QA pode escrever testes sem perguntar nada?
-- [ ] Os non-goals estão tão claros quanto os goals?
-- [ ] Todo caso de erro tem um comportamento definido?
-- [ ] Todos os requisitos têm IDs rastreáveis?
-- [ ] Não há contradições entre requisitos?
-- [ ] Open questions estão documentadas (não silenciosas)?
-- [ ] Métricas de sucesso são numéricas e verificáveis?
+| Criterion | Points | How to verify |
+|-----------|--------|---------------|
+| Non-Goals section (4) clear and useful | 7 | At least 2 non-goals that prevent real scope creep |
+| Dependencies and integrations mapped (section 10) | 5 | Every external dependency is listed |
+| Rollout / rollback plan present (section 13) | 3 | Strategy and how to revert defined |
+
+**Penalties:**
+- Vague non-goals ("future functionality"): -2 per occurrence
+- Critical dependency not mapped: -3
+
+---
+
+## Dimension 5: Edge Cases (10 points)
+
+Evaluates whether difficult cases have been anticipated.
+
+| Criterion | Points | How to verify |
+|-----------|--------|---------------|
+| At least 3 edge cases listed (section 11) | 5 | Table with ≥ 3 filled rows |
+| Error handling with defined message/behavior | 3 | Each error has expected behavior |
+| External dependency failure cases covered | 2 | At least 1 EC for timeout/unavailability |
+
+**Penalties:**
+- Zero edge cases: -10 (this section zeros out)
+- Edge case without defined behavior: -1 per occurrence
+
+---
+
+## Classification by Score
+
+| Score | Classification | Meaning |
+|-------|----------------|---------|
+| 90–100 | ⭐ Excellent | Ready for immediate implementation |
+| 80–89 | ✅ Good | Ready with minor adjustments |
+| 65–79 | ⚠️ Adequate | Implementable but with risks |
+| 50–64 | 🔶 Incomplete | Needs review before implementing |
+| < 50 | ❌ Insufficient | Go back to interview / draft |
+
+---
+
+## Quick Review Checklist
+
+Before marking a spec as "Approved", confirm:
+
+- [ ] Any dev can implement without asking anything?
+- [ ] Any QA can write tests without asking anything?
+- [ ] Are the non-goals as clear as the goals?
+- [ ] Does every error case have a defined behavior?
+- [ ] Do all requirements have traceable IDs?
+- [ ] Are there no contradictions between requirements?
+- [ ] Are open questions documented (not silent)?
+- [ ] Are success metrics numeric and verifiable?
