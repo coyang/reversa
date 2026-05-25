@@ -5,39 +5,39 @@ reversa:
   version: "x.y.z"
 kind: ambiguity_log
 producedBy: orchestrator
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front-matter>"
 ---
 
 # Ambiguity Log
 
-> Consolidação de todos os itens ⚠️ AMBÍGUOS ou pendentes detectados pelos agentes ao longo do pipeline.
-> Status final esperado quando o pipeline conclui: nenhum item PENDENTE.
+> Consolidation of all ⚠️ AMBIGUOUS or pending items detected by the agents throughout the pipeline.
+> Final expected status when the pipeline finishes: no PENDING items.
 
-## Resumo
-- Total de itens: <N>
-- PENDENTES: <n>
-- RESOLVIDOS COM DECISÃO HUMANA: <n>
-- REFERIDOS À CODIFICAÇÃO: <n>
+## Summary
+- Total items: <N>
+- PENDING: <n>
+- RESOLVED WITH HUMAN DECISION: <n>
+- DEFERRED TO CODING: <n>
 
-## Itens
+## Items
 
 ### AMB-001
-- **Descrição**: <texto>
-- **Detectado por**: paradigm_advisor | curator | strategist | designer | screen_translator | inspector
-- **Origem**: <referência ao artefato e seção>
-- **Status**: PENDENTE | RESOLVIDO COM DECISÃO HUMANA | REFERIDO À CODIFICAÇÃO
-- **Decisão tomada** (se houver):
-  - **Escolha**: <texto>
-  - **Decisor**: <nome>
-  - **Quando**: <ISO-8601>
-  - **Justificativa**: <texto>
+- **Description**: <text>
+- **Detected by**: paradigm_advisor | curator | strategist | designer | screen_translator | inspector
+- **Origin**: <reference to the artifact and section>
+- **Status**: PENDING | RESOLVED WITH HUMAN DECISION | DEFERRED TO CODING
+- **Decision made** (if any):
+  - **Choice**: <text>
+  - **Decision-maker**: <name>
+  - **When**: <ISO-8601>
+  - **Justification**: <text>
 
-<repetir por item>
+<repeat per item>
 
-## Itens referidos à codificação
-> Lista somente itens com status `REFERIDO À CODIFICAÇÃO`. Aparecem destacados em `handoff.md`.
+## Items deferred to coding
+> List only items with status `DEFERRED TO CODING`. They appear highlighted in `handoff.md`.
 
-- AMB-XXX: <descrição curta>
+- AMB-XXX: <short description>
 
-## Notas
-<Observações finais do orquestrador.>
+## Notes
+<Orchestrator's final observations.>
