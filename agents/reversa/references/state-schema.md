@@ -12,7 +12,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
   "chat_language": "pt-br",
   "doc_language": "English",
   "answer_mode": "chat",
-  "autopilot": "off",
+  "autopilot": "full",
   "doc_level": null,
   "output_folder": "_reversa_sdd",
   "phase": "reconhecimento",

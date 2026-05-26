@@ -5,7 +5,7 @@
   "chat_language": "zh-cn",
   "doc_language": "中文",
   "answer_mode": "chat",
-  "autopilot": "off",
+  "autopilot": "full",
   "doc_level": "complete",
   "output_folder": "_reversa_sdd",
   "forward_folder": "_reversa_forward",

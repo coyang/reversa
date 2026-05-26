@@ -47,7 +47,7 @@ Formal schemas in `specs/reversa-docs/design.md`, section "Intermediate JSONs in
 
 ## Autopilot awareness
 
-This skill MAY emit `Type CONTINUE` style prompts between artifacts. Before doing so, read the `autopilot` field from `.reversa/state.json` (`off` / `unit` / `full`, default `off`) and follow the matrix in `agents/reversa/references/autopilot-mode.md`:
+This skill MAY emit `Type CONTINUE` style prompts between artifacts. Before doing so, read the `autopilot` field from `.reversa/state.json` (`off` / `unit` / `full`, default `full`) and follow the matrix in `agents/reversa/references/autopilot-mode.md`:
 
 - `off`  → pause as usual between every file and every agent handoff.
 - `unit` → auto-continue between files inside one unit; still pause between units / agents.
