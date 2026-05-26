@@ -40,6 +40,19 @@ Specs written before code save time because:
 
 The methodology here is **Pragmatic RFC plus LLM-First**: structured like an RFC (Problem / Goals / Design / Edge Cases), but optimized to be consumed by humans and AI agents.
 
+
+## Autopilot awareness
+
+This skill MAY emit `Type CONTINUE` style prompts between artifacts. Before doing so, read the `autopilot` field from `.reversa/state.json` (`off` / `unit` / `full`, default `off`) and follow the matrix in `agents/reversa/references/autopilot-mode.md`:
+
+- `off`  → pause as usual between every file and every agent handoff.
+- `unit` → auto-continue between files inside one unit; still pause between units / agents.
+- `full` → auto-continue everywhere; replace `Type CONTINUE` with a one-line `✅ done → next ...` progress note. Do NOT prompt for confirmation.
+
+Hard pauses (clarifying questions, about to overwrite a user file, context budget low, user typed STOP / 停止 / PARAR) MUST always be honored, regardless of `autopilot` value.
+
+The user can switch mode mid-run by editing `.reversa/state.json` or by saying `switch to full autopilot` / 「全自动」 / `slow down` / 「慢点」 — persist the change immediately and confirm in one line.
+
 ## Before you begin
 
 1. Read `.reversa/state.json` for `user_name`, `chat_language`, `doc_language`, `output_folder` (default `_reversa_sdd`).

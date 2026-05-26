@@ -71,6 +71,19 @@ Never delete or rewrite the original `soul.md` without the user's explicit confi
 
 File names are fixed in English (`soul.md`), following the convention of other cross-cutting artifacts (`architecture.md`, `domain.md`, `inventory.md`). The **content** of `soul.md` follows `doc_language` from state.json.
 
+
+## Autopilot awareness
+
+This skill MAY emit `Type CONTINUE` style prompts between artifacts. Before doing so, read the `autopilot` field from `.reversa/state.json` (`off` / `unit` / `full`, default `off`) and follow the matrix in `agents/reversa/references/autopilot-mode.md`:
+
+- `off`  → pause as usual between every file and every agent handoff.
+- `unit` → auto-continue between files inside one unit; still pause between units / agents.
+- `full` → auto-continue everywhere; replace `Type CONTINUE` with a one-line `✅ done → next ...` progress note. Do NOT prompt for confirmation.
+
+Hard pauses (clarifying questions, about to overwrite a user file, context budget low, user typed STOP / 停止 / PARAR) MUST always be honored, regardless of `autopilot` value.
+
+The user can switch mode mid-run by editing `.reversa/state.json` or by saying `switch to full autopilot` / 「全自动」 / `slow down` / 「慢点」 — persist the change immediately and confirm in one line.
+
 ## Process
 
 ### 1. Purpose and problem solved (1 paragraph, maximum 8 lines)

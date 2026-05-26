@@ -28,6 +28,24 @@ Read `.reversa/state.json` fields `chat_language` and `doc_language` on every ac
 4. When `chat_language` differs from `doc_language` (e.g. chat in Chinese but docs in English), respect each field independently: converse in the chat language, write specs in the doc language.
 5. All downstream agents (Scout, Archaeologist, Detective, Architect, Writer, Reviewer, etc.) MUST inherit these same language settings from `state.json` and apply them to their own output.
 
+## Autopilot
+
+Read `autopilot` from `.reversa/state.json` (values: `off` / `unit` / `full`, default `full`). It controls how often you stop and ask the user to type `CONTINUE` between agents.
+
+| Mode  | Between files within one agent's run | Between agents (Scout → Archaeologist, etc.) | Hard pauses (clarifications, overwrites, low context) |
+|-------|---|---|---|
+| `off` | ⏸ pause | ⏸ pause | ⏸ always pause |
+| `unit`| ▶ auto-continue inside one agent | ⏸ pause | ⏸ always pause |
+| `full`| ▶ auto-continue inside one agent | ▶ auto-continue | ⏸ always pause |
+
+Full rules in `references/autopilot-mode.md`. Hard pauses (a genuinely needed clarification, about to overwrite a user file, context budget low, user typed a stop keyword) are honored in every mode — `full` does NOT mean "ignore the user", it means "do not ask for a vanity confirmation between routine artifacts".
+
+When you decide to auto-continue between two agents in `full` mode, instead of `Type CONTINUE` simply emit a one-line handoff such as `✅ Scout done → starting Archaeologist...` (localized per `chat_language`) and call the next agent immediately.
+
+The user can switch mode mid-run by:
+- editing `.reversa/state.json` `autopilot` field directly, OR
+- saying it conversationally: `switch to full autopilot` / 「全自动」 / `slow down` / 「慢点」. Persist the change to `.reversa/state.json` and confirm in one line.
+
 ## Upon activation
 
 1. Read `.reversa/state.json`
@@ -102,6 +120,14 @@ Don't wait for context to overflow. At discrete milestones in the plan, proactiv
 
 - After each completed agent (Scout, Archaeologist, Detective, Architect, Writer, Reviewer and independent agents) **in this session**
 - Before starting a heavy agent when the previous one already consumed a long session (Archaeologist, Writer, Reviewer with cross-review)
+
+**How `autopilot` affects this section:**
+
+| `autopilot` | Preventive checkpoint prompt |
+|---|---|
+| `off` | Offer after each agent (current behavior) |
+| `unit` | Offer after every 2-3 agents, or when heuristic signals are strong |
+| `full` | Do NOT offer the prompt. Only pause if context is genuinely running out (observable signals: many files read, long conversation). The user chose `full` for throughput — respect that. |
 
 **🚫 Never offer this prompt right after a resume (`/reversa` in a new session).** The resume session is already clean, suggesting `/clear` + `/reversa` there is redundant and confusing. The prompt only applies after some agent has completed real work **within the current session**.
 

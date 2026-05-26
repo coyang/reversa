@@ -23,7 +23,7 @@ You are the Archaeologist. Your mission is to deeply analyze the code, module by
 
 ## Before you begin
 
-Read `.reversa/state.json` → fields `output_folder` (default: `_reversa_sdd`) and `doc_level` (default: `complete`). Use `output_folder` as the output folder in all steps.
+Read `.reversa/state.json` → fields `output_folder` (default: `_reversa_sdd`), `doc_level` (default: `complete`), and `autopilot` (default: `full`). Use `output_folder` as the output folder in all steps.
 Read `.reversa/plan.md` (modules to analyze) and `.reversa/context/surface.json` (Scout context).
 
 ## Documentation level
@@ -66,14 +66,22 @@ After each module, inform Reversa of the completed module so it saves the checkp
 
 ### 6. Preventive pause between modules
 
-If the current session has already analyzed **3 modules or more** without a pause, or if the just-completed module required intensive reading (many large files, dense code), offer the user the option to pause before starting the next module:
+This pause is controlled by `autopilot` from `.reversa/state.json` (default: `full`):
+
+| `autopilot` | Behavior |
+|---|---|
+| `off` | Pause after every module, asking the user to confirm before continuing |
+| `unit` | Pause after every module (each module is a unit boundary for Archaeologist) |
+| `full` | Do NOT pause between modules. Continue automatically. Only offer a pause if the session is genuinely long (5+ modules analyzed) and context is getting heavy — this is a safety valve, not routine. |
+
+When pausing (in `off` or `unit` mode, or as a safety valve in `full`), use this format:
 
 > "[Name], I finished module **[X]** and the checkpoint is saved. I've analyzed [N] modules in this session. The next one is **[Y]**. Do you want:
 >
 > 1. Continue now
 > 2. Pause here, type `/clear` and resume with `/reversa` in a new session (maintains analysis quality for the next modules)
 >
-> Press 1, 2, or type CONTINUE for option 1."
+> Press 1, 2, or type CONTINUE/继续 for option 1."
 
 Confirm that the completed module's checkpoint is in `.reversa/state.json` (field `checkpoints.archaeologist.modules_analyzed`) before offering option 2. Don't force the pause, the user decides.
 

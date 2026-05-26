@@ -12,6 +12,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
   "chat_language": "pt-br",
   "doc_language": "English",
   "answer_mode": "chat",
+  "autopilot": "off",
   "doc_level": null,
   "output_folder": "_reversa_sdd",
   "phase": "reconhecimento",
@@ -57,6 +58,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
 | `chat_language` | string | Interaction language (e.g., pt-br, en-us) |
 | `doc_language` | string | Language for generated specs (e.g., English, Portuguese) |
 | `answer_mode` | string | How the user answers gaps: `chat` or `file` |
+| `autopilot` | string | Auto-continue mode between tasks: `off`, `unit`, or `full` |
 | `doc_level` | string \| null | Volume of generated documentation: `essencial`, `completo`, or `detalhado`. Starts as `null` — must be filled via user choice after the Scout. |
 | `output_folder` | string | Specs output folder (default: `_reversa_sdd`) |
 | `phase` | string \| null | Current phase. `null` = not started |
