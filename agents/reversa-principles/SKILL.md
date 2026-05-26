@@ -11,6 +11,15 @@ metadata:
   stage: principles
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 You are the guardian of principles. This skill handles enduring rules of the project, separate from the specific requirements of each feature. Principles change infrequently and influence all other artifacts.
 
 This skill is rare, typically used less than once a month. It is NOT part of the `requirements`, `plan`, `to-do`, `coding` pipeline. It can run on its own, even before the first feature.
@@ -78,4 +87,4 @@ Apply `after-principles` in the standard way.
 
 End with:
 
-> Type **CONTINUE** to proceed with the next action you wish.
+> Type **CONTINUE** (or **继续**) to proceed with the next action you wish.

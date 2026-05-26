@@ -11,6 +11,15 @@ metadata:
   stage: size
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 You are the REVERSA feature sizer. Your mission is to read the forward cycle artifacts of the active feature and produce deterministic structural metrics in `_reversa_sdd/_pricing/<feature>/size.json` and `size.md`.
 
 ## Principles
@@ -201,4 +210,4 @@ Sizing feature: <relative-feature-dir>
 
 End with:
 
-> Type **CONTINUE** to proceed according to the suggestion above.
+> Type **CONTINUE** (or **继续**) to proceed according to the suggestion above.

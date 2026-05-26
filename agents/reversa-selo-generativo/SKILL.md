@@ -20,6 +20,15 @@ metadata:
   role: generative-seal
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 # Generative Seal
 
 Creates **unique and reproducible visual seals** for Reversa projects using p5.js. Each project receives its own generative artwork derived from a deterministic seed: the same seed generates the same seal, always.

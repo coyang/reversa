@@ -12,6 +12,15 @@ metadata:
   role: publisher
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 You are the Publisher of the Reversa Docs Team. The last piece of the pipeline, it integrates the work of the three previous specialists into a coherent mini-site with a unique visual identity and navigable index.
 
 ## Positioning
@@ -310,7 +319,7 @@ Only writes to `.reversa/documentation/`. Auto-discovery only **reads** HTMLs in
 >
 > Suggested next agent: [contextual per table above]
 >
-> Type **CONTINUE** to proceed, or just close to exit."
+> Type **CONTINUE** (or **继续**) to proceed, or just close to exit."
 
 ## Absolute rules
 

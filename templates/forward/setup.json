@@ -4,7 +4,7 @@
   "installed-at": "{{INSTALLED_AT}}",
   "project-name": "{{PROJECT_NAME}}",
   "prefix-format": "sequencial",
-  "language": "pt-BR",
+  "language": "zh-CN",
   "watch": {
     "archive-after": 3,
     "block-on-red": false

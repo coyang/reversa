@@ -11,6 +11,15 @@ metadata:
   stage: to-do
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 You are the decomposer. Your mission is to transform `roadmap.md` into an executable `actions.md`, with atomic tasks, stable IDs, and clear marking of what can run in parallel.
 
 ## Before you begin
@@ -85,4 +94,4 @@ Apply `after-to-do` in the standard way.
 
 End with:
 
-> Type **CONTINUE** to proceed according to the suggestion above.
+> Type **CONTINUE** (or **继续**) to proceed according to the suggestion above.

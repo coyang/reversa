@@ -30,15 +30,15 @@ if (!command || command === '--help' || command === '-h') {
   Usage: npx reversa <command>
 
   Commands:
-    install            Install Reversa in the current project
-    update             Update agents to the latest version
-    status             Show the current analysis status
-    uninstall          Remove Reversa from the project
-    add-agent          Add an agent to the project
-    add-engine         Add support for an engine
-    export-diagrams    Export Mermaid diagrams as SVG/PNG images
-                       Options: --format=svg|png  --output=<folder>
-                       Requires: npm install -g @mermaid-js/mermaid-cli
+    install            在当前项目中安装 Reversa
+    update             更新 agent 到最新版本
+    status             查看当前分析状态
+    uninstall          从项目中移除 Reversa
+    add-agent          添加 agent 到项目
+    add-engine         添加引擎支持
+    export-diagrams    导出 Mermaid 图为 SVG/PNG
+                       选项: --format=svg|png  --output=<文件夹>
+                       需要安装: npm install -g @mermaid-js/mermaid-cli
 
   Documentation: https://github.com/sandeco/reversa
   `);
@@ -51,8 +51,8 @@ if (command === '--version' || command === '-v') {
 }
 
 if (!commands[command]) {
-  console.error(`\n  Unknown command: "${command}"`);
-  console.error('  Run "npx reversa --help" to see available commands.\n');
+  console.error(`\n  未知命令: "${command}"`);
+  console.error('  运行 "npx reversa --help" 查看可用命令。\n');
   process.exit(1);
 }
 

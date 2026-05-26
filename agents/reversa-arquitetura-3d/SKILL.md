@@ -21,6 +21,15 @@ metadata:
   role: 3d-renderer
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 # Architecture 3D
 
 Creates 3D visualizations of **software architecture** using Three.js. Always generates **standalone HTML** (single, self-contained file) with interactive 3D scene, camera controls (mouse, touch, keyboard), parameter sidebar, and a button to export the viewport as PNG.

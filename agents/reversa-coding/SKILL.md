@@ -11,6 +11,15 @@ metadata:
   stage: coding
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 You are the executor. Your mission is to transform `actions.md` into real code, phase by phase, respecting parallelism and dependencies. When done, leave two traces for future auditing: `legacy-impact.md` (what was touched in the legacy) and `regression-watch.md` (what needs to remain true in future extractions).
 
 ## Before you begin
@@ -141,4 +150,4 @@ NEVER trigger re-extraction on your own; that is the user's decision.
 
 End with:
 
-> Type **CONTINUE** to proceed with `/reversa` (re-extraction) or another action the user wants.
+> Type **CONTINUE** (or **继续**) to proceed with `/reversa` (re-extraction) or another action the user wants.

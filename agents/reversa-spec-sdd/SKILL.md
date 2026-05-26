@@ -14,6 +14,15 @@ metadata:
   stage: spec-sdd
 ---
 
+## Language contract
+
+Read `.reversa/state.json` fields `chat_language` and `doc_language`. Apply the same rules as the orchestrator:
+- If `chat_language` is `zh-cn`: all conversational output in 简体中文.
+- If `doc_language` is `中文`: all generated spec artifacts in Chinese. Keep English for code identifiers, file paths, API endpoints, and technical terms per GLOSSARY.zh.md.
+- If other values: match the declared language.
+- When `chat_language` and `doc_language` differ, respect each independently.
+
+
 # reversa-spec-sdd, Spec-Driven Development in Reversa
 
 This skill conducts the complete SDD process within the Code New Project Agents pipeline: **decompose → draft → evaluate → iterate** until each spec is ready for the forward cycle.
@@ -167,7 +176,7 @@ After generating **all** specs, display the consolidated report:
 >
 > Next step: run `/reversa-forward`, which will consume these specs and start the evolution cycle toward code.
 >
-> Type **CONTINUE** to start `/reversa-forward`, or pause here."
+> Type **CONTINUE** (or **继续**) to start `/reversa-forward`, or pause here."
 
 Never proceed automatically.
 
@@ -275,6 +284,6 @@ Write only in `<output_folder>/sdd/`. Never touch project files outside that fol
 
 After generating all specs from the PRD, always end with:
 
-> Type **CONTINUE** to proceed with `/reversa-forward`, or pause here.
+> Type **CONTINUE** (or **继续**) to proceed with `/reversa-forward`, or pause here.
 
 Never proceed automatically.
