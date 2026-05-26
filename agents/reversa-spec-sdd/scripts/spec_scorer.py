@@ -125,12 +125,12 @@ def score_completude(text: str) -> DimensionScore:
 
     # Essential sections (1–6) present and with content
     required_sections = [
-        (r'^#{1,2}\s+1[\.\s]+Resum', "Section 1 (Summary)"),
-        (r'^#{1,2}\s+2[\.\s]+Contexto', "Section 2 (Context)"),
+        (r'^#{1,2}\s+1[\.\s]+(Resum|Summary)', "Section 1 (Summary)"),
+        (r'^#{1,2}\s+2[\.\s]+(Contexto|Context)', "Section 2 (Context)"),
         (r'^#{1,2}\s+3[\.\s]+Goals', "Section 3 (Goals)"),
         (r'^#{1,2}\s+4[\.\s]+Non.Goals', "Section 4 (Non-Goals)"),
-        (r'^#{1,2}\s+5[\.\s]+Usuári', "Section 5 (Users)"),
-        (r'^#{1,2}\s+6[\.\s]+Requisitos', "Section 6 (Requirements)"),
+        (r'^#{1,2}\s+5[\.\s]+(Usuári|Users)', "Section 5 (Users)"),
+        (r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements)', "Section 6 (Requirements)"),
     ]
     present = 0
     for pattern, name in required_sections:
@@ -239,7 +239,7 @@ def score_clareza(text: str) -> DimensionScore:
         dim.issues.append("⚠️ Possible ambiguities not flagged (use ⚠️ ABERTO: or section 14)")
 
     # Clear subject in requirements
-    rf_section = section_content(text, r'^#{1,2}\s+6[\.\s]+Requisitos')
+    rf_section = section_content(text, r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements)')
     subjects = count_pattern(rf_section, r'\b(o sistema|o usuário|a plataforma|the system|the user)\b')
     rf_count = count_rf_items(rf_section)
     if rf_count > 0 and subjects >= rf_count * 0.5:
