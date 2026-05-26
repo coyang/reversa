@@ -112,8 +112,8 @@ def has_vague_terms(text: str) -> list[str]:
 
 
 def has_contradictions_signal(text: str) -> bool:
-    # Simple heuristic: presence of "mas" / "porém" / "entretanto" after a requirement
-    return bool(re.search(r'RF-\d+.*?\b(mas|porém|entretanto|however|but)\b', text,
+    # Simple heuristic: presence of "but" / "however" / "nevertheless" after a requirement
+    return bool(re.search(r'RF-\d+.*?\b(mas|porém|entretanto|however|but|nevertheless)\b', text,
                            re.IGNORECASE | re.DOTALL))
 
 
@@ -282,9 +282,9 @@ def score_escopo(text: str) -> DimensionScore:
         dim.issues.append("❌ Non-goals missing")
 
     # Mapped dependencies
-    has_deps = has_section(text, r'10[\.\s]+Integra|Dependências|Dependencies')
+    has_deps = has_section(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep')
     if has_deps:
-        deps_content = section_content(text, r'10[\.\s]+Integra|Dependências')
+        deps_content = section_content(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep')
         if has_content(deps_content, 5):
             score += 5
             dim.positives.append("✅ Dependencies and integrations mapped")
@@ -295,7 +295,7 @@ def score_escopo(text: str) -> DimensionScore:
         dim.issues.append("⚠️ External dependencies not mapped (section 10)")
 
     # Rollout plan
-    has_rollout = has_section(text, r'Rollout|Plano de Lançamento|13[\.\s]+')
+    has_rollout = has_section(text, r'Rollout|Release Plan|13[\.\s]+')
     if has_rollout:
         score += 3
         dim.positives.append("✅ Rollout/rollback plan present")
@@ -338,7 +338,7 @@ def score_edge_cases(text: str) -> DimensionScore:
 
     # External failure coverage
     covers_external = bool(re.search(
-        r'(timeout|indisponível|fora do ar|falha|erro\s+\d{3}|retry|fallback)',
+        r'(timeout|unavailable|down|failure|error\s+\d{3}|retry|fallback)',
         ec_section, re.IGNORECASE
     ))
     if covers_external:
