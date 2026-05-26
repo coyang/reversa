@@ -65,6 +65,7 @@ plugins:
       lang:
         - pt
         - en
+        - zh
   - i18n:
       docs_structure: suffix
       languages:
@@ -130,6 +131,65 @@ plugins:
             Reversa New: Reversa New
             Reversa Forward: Reversa Forward
             Reconstructor: Reconstructor
+        - locale: zh
+          name: 中文
+          build: true
+          nav_translations:
+            Home: 首页
+            Why Reversa: 为什么选择 Reversa
+            Installation: 安装
+            How to use: 如何使用
+            CLI: 命令行
+            Configuration: 配置
+            Supported engines: 支持的引擎
+            Analysis pipeline: 分析流水线
+            Confidence scale: 置信度等级
+            Agents: 代理
+            Overview: 概览
+            Guide with analogies: 类比指南
+            Reversa (Orchestrator): Reversa（编排器）
+            Soul Extractor: 灵魂提取器
+            Translators: 翻译器
+            N8N Translator: N8N 翻译器
+            Generated outputs: 生成产物
+            Developing from specs: 基于 Spec 开发
+            Migration: 迁移
+            The 5 agents: 5 个代理
+            Paradigm shift: 范式转换
+            Strategies: 策略
+            Brief schema: Brief 模式
+            Contributing: 参与贡献
+            Code New Project Agents: 新项目代理
+            The greenfield agents: 绿地项目代理
+            Code Forward Agents: 正向工程代理
+            The Forward agents: 正向工程代理
+            Migration Agents: 迁移代理
+            Pricing and Size Agents: 定价与规模代理
+            Translators N8N->Specs->Python: 翻译器 N8N->Specs->Python
+            Documentation Team: 文档团队
+            The 4 visual agents: 4 个可视化代理
+            Forward orchestrator: 正向编排器
+            Requirements: 需求
+            Clarify: 澄清
+            Quality: 质量
+            Plan: 计划
+            To-Do: 待办
+            Audit: 审计
+            Coding: 编码
+            Principles: 原则
+            Resume: 恢复
+            Ideator: 创意
+            Researcher: 调研
+            Drafter: 起草
+            Spec SDD: Spec SDD
+            Mapper: 映射器
+            Analyst: 分析师
+            Storyteller: 叙述者
+            Publisher: 发布者
+            Reversa Docs: Reversa 文档
+            Reversa New: Reversa 新项目
+            Reversa Forward: Reversa 正向工程
+            Reconstructor: 重构器
         - locale: es
           name: Español
           build: true

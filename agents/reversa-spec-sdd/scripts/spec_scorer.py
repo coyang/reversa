@@ -103,7 +103,9 @@ def has_vague_terms(text: str) -> list[str]:
     vague = ["quickly", "shortly", "briefly", "some", "many",
              "efficiently", "intuitively", "easy to use",
              "user-friendly", "performant", "beautiful", "fast",
-             "good", "rapidly", "easily", "nice"]
+             "good", "rapidly", "easily", "nice",
+             "快速", "简单", "高效", "用户友好", "美观", "性能好",
+             "容易", "方便", "不错", "还行"]
     found = []
     for term in vague:
         if re.search(r'\b' + re.escape(term) + r'\b', text, re.IGNORECASE):
@@ -112,8 +114,8 @@ def has_vague_terms(text: str) -> list[str]:
 
 
 def has_contradictions_signal(text: str) -> bool:
-    # Simple heuristic: presence of "but" / "however" / "nevertheless" after a requirement
-    return bool(re.search(r'RF-\d+.*?\b(mas|porém|entretanto|however|but|nevertheless)\b', text,
+    # Simple heuristic: presence of "but" / "however" / "nevertheless" / 但是 after a requirement
+    return bool(re.search(r'RF-\d+.*?(?:\b(mas|porém|entretanto|however|but|nevertheless)\b|但是|然而|不过)', text,
                            re.IGNORECASE | re.DOTALL))
 
 
@@ -125,12 +127,12 @@ def score_completude(text: str) -> DimensionScore:
 
     # Essential sections (1–6) present and with content
     required_sections = [
-        (r'^#{1,2}\s+1[\.\s]+(Resum|Summary)', "Section 1 (Summary)"),
-        (r'^#{1,2}\s+2[\.\s]+(Contexto|Context)', "Section 2 (Context)"),
-        (r'^#{1,2}\s+3[\.\s]+Goals', "Section 3 (Goals)"),
-        (r'^#{1,2}\s+4[\.\s]+Non.Goals', "Section 4 (Non-Goals)"),
-        (r'^#{1,2}\s+5[\.\s]+(Usuári|Users)', "Section 5 (Users)"),
-        (r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements)', "Section 6 (Requirements)"),
+        (r'^#{1,2}\s+1[\.\s]+(Resum|Summary|摘要)', "Section 1 (Summary)"),
+        (r'^#{1,2}\s+2[\.\s]+(Contexto|Context|背景)', "Section 2 (Context)"),
+        (r'^#{1,2}\s+3[\.\s]+(Goals|目标)', "Section 3 (Goals)"),
+        (r'^#{1,2}\s+4[\.\s]+(Non.Goals|非目标)', "Section 4 (Non-Goals)"),
+        (r'^#{1,2}\s+5[\.\s]+(Usuári|Users|用户)', "Section 5 (Users)"),
+        (r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements|需求)', "Section 6 (Requirements)"),
     ]
     present = 0
     for pattern, name in required_sections:
@@ -199,10 +201,10 @@ def score_testabilidade(text: str) -> DimensionScore:
         dim.issues.append(f"⚠️ Vague terms found: {', '.join(vague[:5])}")
 
     # Main flow (happy path)
-    has_happy_path = has_section(text, r'Fluxo Principal|Happy Path|6\.2')
+    has_happy_path = has_section(text, r'Fluxo Principal|Happy Path|6\.2|主流程|正常流程')
     if has_happy_path:
         # Check if it has at least 3 numbered steps
-        happy_content = section_content(text, r'Fluxo Principal|Happy Path|6\.2')
+        happy_content = section_content(text, r'Fluxo Principal|Happy Path|6\.2|主流程|正常流程')
         steps = count_pattern(happy_content, r'^\s*\d+\.')
         if steps >= 3:
             score += 8
@@ -230,7 +232,7 @@ def score_clareza(text: str) -> DimensionScore:
     score = 0
 
     # Open questions flagged
-    open_questions = count_pattern(text, r'⚠️\s*ABERTO:|OQ-\d+')
+    open_questions = count_pattern(text, r'⚠️\s*ABERTO:|OQ-\d+|⚠️\s*开放问题|⚠️\s*待定:')
     ambiguities_hidden = count_pattern(text, r'\?.*\?')  # multiple question marks — sign of doubt
     if open_questions > 0:
         score += 6
@@ -239,8 +241,8 @@ def score_clareza(text: str) -> DimensionScore:
         dim.issues.append("⚠️ Possible ambiguities not flagged (use ⚠️ ABERTO: or section 14)")
 
     # Clear subject in requirements
-    rf_section = section_content(text, r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements)')
-    subjects = count_pattern(rf_section, r'\b(o sistema|o usuário|a plataforma|the system|the user)\b')
+    rf_section = section_content(text, r'^#{1,2}\s+6[\.\s]+(Requisitos|Requirements|需求)')
+    subjects = count_pattern(rf_section, r'\b(o sistema|o usuário|a plataforma|the system|the user)\b|系统|用户|平台')
     rf_count = count_rf_items(rf_section)
     if rf_count > 0 and subjects >= rf_count * 0.5:
         score += 6
@@ -282,9 +284,9 @@ def score_escopo(text: str) -> DimensionScore:
         dim.issues.append("❌ Non-goals missing")
 
     # Mapped dependencies
-    has_deps = has_section(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep')
+    has_deps = has_section(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep|依赖')
     if has_deps:
-        deps_content = section_content(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep')
+        deps_content = section_content(text, r'10[\.\s]+Integra|Dependencies|10[\.\s]+Dep|依赖')
         if has_content(deps_content, 5):
             score += 5
             dim.positives.append("✅ Dependencies and integrations mapped")
@@ -295,7 +297,7 @@ def score_escopo(text: str) -> DimensionScore:
         dim.issues.append("⚠️ External dependencies not mapped (section 10)")
 
     # Rollout plan
-    has_rollout = has_section(text, r'Rollout|Release Plan|13[\.\s]+')
+    has_rollout = has_section(text, r'Rollout|Release Plan|13[\.\s]+|发布计划')
     if has_rollout:
         score += 3
         dim.positives.append("✅ Rollout/rollback plan present")
@@ -338,7 +340,7 @@ def score_edge_cases(text: str) -> DimensionScore:
 
     # External failure coverage
     covers_external = bool(re.search(
-        r'(timeout|unavailable|down|failure|error\s+\d{3}|retry|fallback)',
+        r'(timeout|unavailable|down|failure|error\s+\d{3}|retry|fallback|超时|不可用|失败|重试)',
         ec_section, re.IGNORECASE
     ))
     if covers_external:
