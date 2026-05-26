@@ -311,9 +311,9 @@ body[data-style="sober"] {
     --reversa-code-bg:      #ece9e1;
     --reversa-code-fg:      #2b3a4a;
 
-    --reversa-font-body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --reversa-font-heading: "Inter", system-ui, -apple-system, sans-serif;
-    --reversa-font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+    --reversa-font-body:    "Inter", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+    --reversa-font-heading: "Inter", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --reversa-font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", "Noto Sans Mono CJK SC", monospace;
 
     --reversa-font-size-xs: 12px;
     --reversa-font-size-sm: 13px;
@@ -352,9 +352,9 @@ body[data-style="premium"] {
     --reversa-code-bg:      #1a1a26;
     --reversa-code-fg:      #f4d03f;
 
-    --reversa-font-body:    "Lora", Georgia, "Times New Roman", serif;
-    --reversa-font-heading: "Inter", system-ui, sans-serif;
-    --reversa-font-mono:    "JetBrains Mono", ui-monospace, monospace;
+    --reversa-font-body:    "Lora", Georgia, "Times New Roman", "Source Han Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
+    --reversa-font-heading: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --reversa-font-mono:    "JetBrains Mono", ui-monospace, "Noto Sans Mono CJK SC", monospace;
 
     --reversa-space-xs: 6px;
     --reversa-space-sm: 12px;
@@ -429,8 +429,8 @@ body[data-style="exploratory"] {
     --reversa-code-bg:      #1a1a2e;
     --reversa-code-fg:      #ffb3ba;
 
-    --reversa-font-body:    "Inter", system-ui, sans-serif;
-    --reversa-font-heading: "Inter", system-ui, sans-serif;
+    --reversa-font-body:    "Inter", system-ui, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --reversa-font-heading: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
 
     --reversa-space-xl: 48px;
     --reversa-font-size-h1: 32px;

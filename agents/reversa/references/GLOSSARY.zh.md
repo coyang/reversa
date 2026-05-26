@@ -299,3 +299,115 @@
 | DevOps | DevOps | 保留英文 |
 | SLA | SLA | 服务等级协议，保留英文缩写 |
 | SLO | SLO | 服务等级目标，保留英文缩写 |
+
+---
+
+## Spec 标题映射表（强制使用）
+
+当 `doc_language` 为 `中文` / `Chinese` 时，所有 writer 类 agent（reversa-writer / reversa-requirements / reversa-clarify / reversa-plan / reversa-architect / reversa-detective / reversa-docs-* 等）生成的 Markdown 文件**必须使用下表中的中文标题**，避免每个 agent 各自翻译造成不一致。
+
+### requirements.md
+
+| English heading | 中文标题 |
+|---|---|
+| `# Requirements` | `# 需求` |
+| `## Functional Requirements` | `## 功能性需求` |
+| `## Non-Functional Requirements` | `## 非功能性需求` |
+| `## Constraints` | `## 约束条件` |
+| `## Edge Cases` | `## 边界情况` |
+| `## Acceptance Criteria` | `## 验收标准` |
+| `## Out of Scope` | `## 范围外` |
+| `## Open Questions` | `## 待解决问题` |
+| `## Glossary` | `## 术语表` |
+
+需求条目编号**保持英文前缀**：`RF-001`、`RNF-001`、`EC-001`、`AC-001`、`OQ-001`，便于跨文件引用与 grep。
+
+### design.md / architecture.md
+
+| English heading | 中文标题 |
+|---|---|
+| `# Design` | `# 设计方案` |
+| `# Architecture` | `# 架构` |
+| `## Overview` | `## 概览` |
+| `## Context` | `## 上下文` |
+| `## Components` | `## 组件` |
+| `## Data Model` | `## 数据模型` |
+| `## API Contracts` | `## 接口契约` |
+| `## Sequence Diagrams` | `## 时序图` |
+| `## Error Handling` | `## 错误处理` |
+| `## Security Considerations` | `## 安全考量` |
+| `## Performance Considerations` | `## 性能考量` |
+| `## Deployment` | `## 部署` |
+| `## Decisions / ADRs` | `## 决策记录 (ADR)` |
+| `## Trade-offs` | `## 取舍权衡` |
+| `## Risks` | `## 风险` |
+| `## Alternatives Considered` | `## 备选方案` |
+
+### tasks.md
+
+| English heading | 中文标题 |
+|---|---|
+| `# Tasks` | `# 任务清单` |
+| `## New` | `## 新建` |
+| `## Modify` | `## 修改` |
+| `## Delete` | `## 删除` |
+| `## Test` | `## 测试` |
+| `## Infra` | `## 基础设施` |
+| `## Dependencies` | `## 依赖关系` |
+
+任务编号**保持英文**：`T-001` / `T-002` ...
+
+### plan.md / clarify.md / audit.md / quality.md
+
+| English heading | 中文标题 |
+|---|---|
+| `# Plan` | `# 计划` |
+| `# Clarify` | `# 澄清` |
+| `# Audit` | `# 审计` |
+| `# Quality Report` | `# 质量报告` |
+| `## Phases` | `## 阶段` |
+| `## Milestones` | `## 里程碑` |
+| `## Doubts` | `## 疑问` |
+| `## Assumptions` | `## 假设` |
+| `## Findings` | `## 发现` |
+| `## Recommendations` | `## 建议` |
+| `## Action Items` | `## 行动项` |
+
+疑问标记**保持英文**：`[DOUBT-HIGH]`、`[DOUBT-MEDIUM]`、`[DOUBT-LOW]`（不要译成「[疑问-高]」，因为可能被脚本 grep）。
+
+### inventory.md / code-analysis.md / data-dictionary.md（Discovery 产物）
+
+| English heading | 中文标题 |
+|---|---|
+| `# Inventory` | `# 项目清单` |
+| `# Code Analysis` | `# 代码分析` |
+| `# Data Dictionary` | `# 数据字典` |
+| `## Modules` | `## 模块` |
+| `## Files` | `## 文件` |
+| `## Entry Points` | `## 入口点` |
+| `## External Dependencies` | `## 外部依赖` |
+| `## Database Tables` | `## 数据表` |
+| `## Fields` | `## 字段` |
+| `## Business Rules` | `## 业务规则` |
+| `## Detected Flows` | `## 检测到的流程` |
+
+### soul.md（Extract Soul 产物）
+
+| English heading | 中文标题 |
+|---|---|
+| `# Soul` | `# 项目灵魂` |
+| `## Mission` | `## 使命` |
+| `## Why This Exists` | `## 存在的理由` |
+| `## Core Concepts` | `## 核心概念` |
+| `## Personas` | `## 用户画像` |
+| `## North Star Metric` | `## 北极星指标` |
+| `## Non-Goals` | `## 非目标` |
+| `## Tone & Voice` | `## 语气与风格` |
+
+### 通用约定
+
+1. 任何**未在上表列出**的小节，writer agent 应优先在主术语表中查找，再决定翻译
+2. **代码块、配置示例、JSON / YAML / TOML / SQL 内容**保持英文原文，不翻译键名
+3. **图表（Mermaid / PlantUML）**节点 ID 用英文（如 `A`, `auth`），label 可用中文（如 `A[用户认证]`）
+4. **链接锚点**（`#functional-requirements`）应跟随中文标题自动生成的锚（如 `#功能性需求`）；如果需要稳定 ID 供外部引用，在标题后加 `<a id="english-anchor"></a>` 显式标记
+5. **置信度与状态徽标**保留 emoji 一致：🟢 (high) / 🟡 (medium) / 🔴 (low / blocker)，文字说明用中文：「🟢 高置信」「🟡 中等置信」「🔴 待人工确认」

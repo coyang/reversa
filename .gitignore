@@ -8,3 +8,7 @@ site/
 .tmp-mkdocs-site/
 specs/
 __pycache__/
+.claude
+.agents
+.reversa
+spec

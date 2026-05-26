@@ -1,4 +1,4 @@
-# Reversa 
+# Reversa
 <small>by sandeco</small>
 
 **Turn legacy systems into executable specifications for AI agents.**
@@ -8,6 +8,7 @@
 [![Reversa paper](https://raw.githubusercontent.com/sandeco/reversa/main/docs/img/reversa-paper.png)](https://arxiv.org/abs/2605.18684)
 
 [![English Docs](https://img.shields.io/badge/DOCS-English-009c3b?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/)<br>
+[![中文文档](https://img.shields.io/badge/DOCS-%E4%B8%AD%E6%96%87-c8102e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/zh/)<br>
 [![Português Docs](https://img.shields.io/badge/DOCS-Portugu%C3%AAs-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://sandeco.github.io/reversa/pt/)<br>
 [![Español Docs](https://img.shields.io/badge/DOCS-Espa%C3%B1ol-c60b1e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/es/)
 
@@ -54,6 +55,79 @@ The installer will:
 > Agents write only to `.reversa/` and the output folder (`_reversa_sdd/` by default).
 
 **Requirements:** Node.js 18+
+
+---
+
+## Development mode (use a local fork / unreleased version)
+
+Use this workflow when you want to run a **modified local copy** of Reversa (for example: an internal fork, a feature branch, the Chinese-first build, or any change that is not yet published to npm). Instead of pulling the package from the npm registry, you tell your machine to resolve `reversa` to a local checkout via `npm link`.
+
+### One-time setup (in the Reversa repo)
+
+```bash
+cd /path/to/reversa            # e.g. ~/work/opensource/reversa
+npm install                    # install chalk / inquirer / ora / semver
+npm link                       # register the global symlink for the `reversa` bin
+
+# Verify
+reversa --version              # should print the version from package.json
+which reversa                  # should point to <repo>/bin/reversa.js
+```
+
+> If you later edit any agent / SKILL.md / template in the repo, you do **not** need to re-link. The next `reversa install` in any project picks up the changes automatically.
+
+### Install your local Reversa into a legacy project
+
+```bash
+cd /path/to/legacy-project
+
+# 1) Snapshot the project before anything else (highly recommended)
+git add -A && git commit -m "snapshot before reversa" 2>/dev/null \
+  || cp -r . ../$(basename "$PWD")-backup
+
+# 2) Run the linked Reversa (DO NOT use `npx reversa` — npx prefers the published npm package)
+reversa install
+
+# 3) Open the project in your AI agent (Claude Code, Cursor, Codex, Gemini CLI, ...)
+#    Then activate Reversa:
+#       /reversa
+```
+
+### Verify the local build is actually being used
+
+```bash
+# Inside the legacy project, after install:
+cat .reversa/state.json | head -10                  # version field should match your local repo
+cat .agents/skills/reversa/SKILL.md | head -20      # contents should mirror your local edits
+```
+
+### Updating after you change the Reversa source
+
+Because `npm link` is a live symlink, **source changes are picked up instantly**. To propagate them into an already-installed legacy project, simply re-run the installer there:
+
+```bash
+cd /path/to/legacy-project
+reversa install                 # answer "yes" to the re-install prompt
+```
+
+This refreshes `.agents/skills/`, `.claude/skills/` and the engine entry files (`CLAUDE.md`, `AGENTS.md`, …) while preserving `.reversa/state.json` (your in-flight analysis progress is not lost).
+
+### Unlink when you are done
+
+```bash
+cd /path/to/reversa
+npm unlink -g reversa           # remove the global symlink
+# (optional) restore the npm-published version in a project:
+cd /path/to/legacy-project && npx reversa install
+```
+
+### Alternative install methods (no `npm link`)
+
+| Method | When to use | Command |
+|---|---|---|
+| Direct bin call | One-off use, zero global state | `node /path/to/reversa/bin/reversa.js install` |
+| Local file dependency | Lock the local version inside the legacy project's `package.json` | `npm install /path/to/reversa` then `npx reversa install` |
+| Tarball | Distribute a frozen build to teammates / CI | `cd reversa && npm pack` → copy `reversa-*.tgz` → `npm install ./reversa-*.tgz` |
 
 ---
 

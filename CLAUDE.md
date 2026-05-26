@@ -71,3 +71,27 @@ No test suite, linter, or CI/CD pipeline exists.
 - Commit messages follow conventional commits: `feat()`, `fix()`, `docs()`, `chore()`, `refactor()`
 - Version bumps are dedicated commits: `chore(release): bump reversa to X.Y.Z`
 - Dependencies are production-only (no devDependencies): chalk, inquirer, ora, semver
+
+
+---
+
+# Reversa
+
+> Reverse Engineering Framework installed in this project.
+
+## How to use
+
+Type `/reversa` to activate Reversa and start or resume the project analysis.
+
+## Behavior on activation
+
+When the user types `/reversa` or the word `reversa` alone in a message:
+
+1. Activate the `reversa` skill available at `.claude/skills/reversa/SKILL.md`
+2. If not found in `.claude/skills/`, try `.agents/skills/reversa/SKILL.md`
+3. Read the SKILL.md in full and follow the Reversa instructions exactly
+
+## Non-negotiable rule
+
+Never delete, modify, or overwrite pre-existing files in the legacy project.
+Reversa writes **only** to `.reversa/` and `_reversa_sdd/`.

@@ -10,9 +10,9 @@ Configured by the `autopilot` field in `.reversa/state.json` (and `[analysis].au
 
 | Value | Behavior | When to use |
 |---|---|---|
-| `off` (default) | Pause after **every file** and after **every agent**. Agent emits `Type CONTINUE to proceed.` and stops. | Safest. First-time users, sensitive code reviews, when you want to inspect each artifact before the next runs. |
+| `off` | Pause after **every file** and after **every agent**. Agent emits `Type CONTINUE to proceed.` and stops. | Maximum control. First-time users who want to inspect each artifact before the next runs. |
 | `unit` | Pause only **between units / modules** (e.g. after finishing `device/requirements.md` + `device/design.md` + `device/tasks.md`) and **between agents**. Files inside a unit are produced back-to-back without pausing. | Recommended sweet spot. Lets you batch-review per module while removing per-file friction. |
-| `full` | **Never pause for CONTINUE.** Run the entire planned sequence (all files, all units, all agents) until the natural end of the orchestrator's plan. Still pauses for **genuine information needs** (clarifying questions, ambiguous business rules, missing prerequisites). | You trust the plan and want maximum throughput. Best for second-pass runs, CI pipelines, or when you have a strong git snapshot to roll back from. |
+| `full` (default) | **Never pause for CONTINUE.** Run the entire planned sequence (all files, all units, all agents) until the natural end of the orchestrator's plan. Still pauses for **genuine information needs** (clarifying questions, ambiguous business rules, missing prerequisites). | Default mode. You trust the plan and want maximum throughput. Best for most runs; switch to `off` when you need step-by-step control. |
 
 ---
 
@@ -117,9 +117,7 @@ Conversely, `slow down` / 「慢点」 / `pausar` should switch back to `off` im
 
 ## Default policy
 
-- New installs default to `off` (safest UX for first-time users; matches existing pre-1.3.x behavior).
-- Existing installs without the field set MUST be treated as `off`.
-- Set `autopilot = "full"` only when you have:
-  - committed a git snapshot of the project
-  - reviewed the orchestrator's plan
-  - low risk tolerance for an "oh no, it generated 30 wrong files" moment
+- New installs default to `full` (maximum throughput; the user chose to run Reversa, so let it run).
+- Existing installs without the field set MUST be treated as `full`.
+- Users who want step-by-step control can set `autopilot = "off"` during `reversa install` or in `.reversa/config.user.toml`.
+- Hard pauses (overwrites, genuine clarifications, low context) are always honored regardless of mode.
