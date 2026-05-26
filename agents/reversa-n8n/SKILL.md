@@ -146,8 +146,8 @@ If `.reversa/state.json` does not yet exist, create it from the template in `tem
 - `version`: read from Reversa's `package.json` (`version` field)
 - `project`: the N8N workflow `name` (human-readable, without slug)
 - `user_name`: if already filled in another existing state, keep it; otherwise, ask the user before handoff
-- `chat_language`: `pt-br` by default (or follow what the user used in the conversation)
-- `doc_language`: `Português` by default
+- `chat_language`: `en-us` by default (or follow what the user used in the conversation)
+- `doc_language`: `English` by default
 - `doc_level`: `essential` (the N8N spec is already compact, the pipeline does not need to expand much)
 - `output_folder`: `_reversa_sdd` (default of the main pipeline)
 - `phase`: `null` (let `/reversa` set it to `recognition` upon startup)
