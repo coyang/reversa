@@ -1,29 +1,29 @@
 # Layer Stack 3D
 
-Visualization of **architectural layers** stacked vertically, each layer as a plane with its modules, connected by vertical arrows showing the dependency flow between layers.
+Visualization of **architectural layers** stacked vertically, each layer as a plane with its modules, connected by vertical arrows that show the dependency flow between layers.
 
 ## Mapping
 
 | Architectural concept | Visual |
 |---|---|
 | Layer (UI, Domain, Infra, etc.) | Horizontal plane at distinct height |
-| Module within layer | Box/disk positioned on the layer plane |
+| Module within the layer | Box/disk positioned on the layer plane |
 | Inter-layer dependency | Oriented vertical line connecting modules |
 | Flow direction | Arrow at the end of the line |
-| Layer violation (lower layer importing from above) | Pulsing red line |
+| Layer violation (lower layer importing from above) | Pulsating red line |
 
 ## When to use
 
 - Validate that the architecture follows Clean Architecture, Hexagonal, or Onion.
-- Detect **layer violations** (UI importing directly from Infra, for example).
+- Detect **layer violations** (e.g., UI importing directly from Infra).
 - Present the system to stakeholders who think in layers.
-- Compare with the expected architectural diagram side-by-side.
+- Compare with the expected architectural diagram side by side.
 
 **When to avoid**: systems without clear layer separation (flat monoliths). Use Code City.
 
 ## Layer detection
 
-The skill accepts layer mapping from the user (via JSON) or attempts to infer it from folder patterns.
+The skill accepts the layer mapping from the user (via JSON) or tries to infer it from folder patterns.
 
 **Explicit mapping**:
 
@@ -38,7 +38,7 @@ The skill accepts layer mapping from the user (via JSON) or attempts to infer it
 }
 ```
 
-**Heuristic inference** (when not provided): regex on folder names.
+**Heuristic inference** (when not provided): regex over folder names.
 
 ```javascript
 const LAYER_PATTERNS = [
@@ -73,7 +73,7 @@ const layerPlanes = layers.map((layer, i) => ({
 
 ### 2. Position modules within the layer
 
-Simple packing in a 2D grid on the layer plane.
+Simple 2D grid packing on the layer plane.
 
 ```javascript
 layerPlanes.forEach((layer) => {
@@ -105,7 +105,7 @@ layerPlanes.forEach((layer, i) => {
     plane.position.y = layer.y;
     scene.add(plane);
 
-    // Lateral layer label
+    // Side layer label
     const label = addLabel(layer.name, new THREE.Vector3(LAYER_SIZE / 2 + 20, layer.y, 0));
     scene.add(label);
 });
@@ -161,7 +161,7 @@ edges.forEach((e) => {
 
 ### 6. Layer violation detection
 
-Standard rule (Clean Architecture): layers only depend on layers with higher `order` (more "inward").
+The default rule (Clean Architecture): layers only depend on layers with greater `order` (more "inward").
 
 ```javascript
 function isLayerViolation(src, dst) {
@@ -169,7 +169,7 @@ function isLayerViolation(src, dst) {
 }
 ```
 
-There can be configurable exceptions (e.g., ports/adapters in hexagonal).
+There may be configurable exceptions (e.g., ports/adapters in hexagonal).
 
 ## Violation animation
 
@@ -191,7 +191,7 @@ function pulseViolations(time) {
 <aside id="sidebar">
     <h3>Layer Stack</h3>
 
-    <label>Spacing between layers
+    <label>Layer spacing
         <input type="range" min="40" max="200" value="80" data-param="layerGap">
     </label>
 
@@ -217,7 +217,7 @@ function pulseViolations(time) {
 </aside>
 ```
 
-The `#violations-count` counter shows "X violations detected" in real-time.
+The `#violations-count` counter shows in real time "X violations detected".
 
 ## Interaction
 
@@ -227,4 +227,4 @@ The `#violations-count` counter shows "X violations detected" in real-time.
 
 ## Performance
 
-Layers typically have dozens to a few hundred modules each. Total limit of ~2,000 modules. Above that, group by folder within each layer.
+Layers typically have dozens to a few hundred modules each. Total limit of ~2,000 modules. Above this, group by folder within each layer.

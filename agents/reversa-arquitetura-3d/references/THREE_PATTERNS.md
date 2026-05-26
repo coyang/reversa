@@ -4,7 +4,7 @@ Quick reference of setup, materials, and techniques common to all skill modes. T
 
 ---
 
-## Base scene setup
+## Base Scene Setup
 
 ```javascript
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
@@ -40,7 +40,7 @@ controls.minDistance = 20;
 controls.maxDistance = 1500;
 ```
 
-## Default lighting
+## Standard Lighting
 
 ```javascript
 // Soft ambient light to avoid pitch black shadows
@@ -64,7 +64,7 @@ dir.shadow.camera.bottom = -400;
 scene.add(dir);
 ```
 
-## Rendering loop
+## Render Loop
 
 ```javascript
 function tick() {
@@ -75,7 +75,7 @@ function tick() {
 tick();
 ```
 
-## Resize handler
+## Resize Handler
 
 ```javascript
 window.addEventListener("resize", () => {
@@ -87,9 +87,9 @@ window.addEventListener("resize", () => {
 });
 ```
 
-## InstancedMesh for large volumes
+## InstancedMesh for Large Volumes
 
-When there are more than 200 elements of the same type (Code City buildings, nodes in dep graph), use `InstancedMesh` instead of a loop with `add()`.
+When there are more than 200 elements of the same type (Code City buildings, dep graph nodes), use `InstancedMesh` instead of a loop with `add()`.
 
 ```javascript
 const boxGeo = new THREE.BoxGeometry(1, 1, 1);
@@ -112,7 +112,7 @@ if (instanced.instanceColor) instanced.instanceColor.needsUpdate = true;
 scene.add(instanced);
 ```
 
-## Labels in CSS2D (always readable)
+## CSS2D Labels (always readable)
 
 ```javascript
 import { CSS2DRenderer, CSS2DObject } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/renderers/CSS2DRenderer.js";
@@ -138,7 +138,7 @@ In `tick()`, call `labelRenderer.render(scene, camera)` along with the main rend
 
 **Rule**: show labels only when the node is close to the camera (distance < threshold) or on hover, to avoid clutter.
 
-## Raycaster for hover and click
+## Raycaster for Hover and Click
 
 ```javascript
 const raycaster = new THREE.Raycaster();
@@ -159,7 +159,7 @@ renderer.domElement.addEventListener("pointermove", (e) => {
 });
 ```
 
-## Reactive sidebar
+## Reactive Sidebar
 
 ```javascript
 const sliders = document.querySelectorAll("aside input[type=range]");
@@ -195,7 +195,7 @@ document.getElementById("export-png").addEventListener("click", () => {
 });
 ```
 
-## Dispose when switching modes
+## Dispose on Mode Switch
 
 ```javascript
 function clearScene() {
@@ -210,12 +210,12 @@ function clearScene() {
 }
 ```
 
-## Performance: practical limits
+## Performance: Practical Limits
 
-| Scenario | Safe limit | Above this |
+| Scenario | Safe Limit | Above That |
 |---|---|---|
 | Independent BoxGeometry | 200 | Migrate to InstancedMesh |
-| Cube InstancedMesh | 5,000 | Apply grouping by folder |
+| InstancedMesh of cubes | 5,000 | Apply grouping by folder |
 | Lines (LineSegments) | 10,000 segments | Use Line2 (fat lines) or group |
-| CSS2D sprites/labels | 100 visible | Show only on hover or proximity |
+| CSS2D Sprites/labels | 100 visible | Show only on hover or proximity |
 | Textured polygons | 50,000 tris | Reduce LOD or disable shadows |
