@@ -100,10 +100,10 @@ def has_numeric_metric(text: str) -> bool:
 
 
 def has_vague_terms(text: str) -> list[str]:
-    vague = ["rapidamente", "logo", "brevemente", "alguns", "muitos",
-             "de forma eficiente", "de forma intuitiva", "fácil de usar",
-             "user-friendly", "performático", "ser bonito", "ser rápido",
-             "ser bom", "quickly", "easily", "fast", "nice"]
+    vague = ["quickly", "shortly", "briefly", "some", "many",
+             "efficiently", "intuitively", "easy to use",
+             "user-friendly", "performant", "beautiful", "fast",
+             "good", "rapidly", "easily", "nice"]
     found = []
     for term in vague:
         if re.search(r'\b' + re.escape(term) + r'\b', text, re.IGNORECASE):
