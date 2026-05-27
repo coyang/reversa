@@ -11,7 +11,7 @@ license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI and other agents compatible with Agent Skills.
 metadata:
   author: reversa
-  version: "1.1.0"
+  version: "1.0.0"
   framework: reversa
   team: shared-skills
   role: mkdocs-generator

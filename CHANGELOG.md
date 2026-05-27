@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.3.0] — 2026-05-25
+## [1.5.0] — 2026-05-27
+
+### Added
+
+- **`reversa-mkdocs` agent**: New shared skill that generates a professional MkDocs documentation site from Reversa specs. Reads `_reversa_sdd/` and `_reversa_forward/`, auto-generates `mkdocs.yml` with proper nav structure, builds HTML site via mkdocs-material theme, and optionally exports PDF. See `agents/reversa-mkdocs/SKILL.md` for details.
+  - Multi-language nav support (中文 / English / Português / Español).
+  - Three PDF export options (mkdocs-pdf-export-plugin / mkdocs-with-pdf / Pandoc fallback).
+  - Mermaid diagram support for C4, ERD, and flowcharts.
+  - Non-destructive: reads only, writes to `.reversa/documentation/site/`.
+
+### Changed
+
+- `package.json`: version bumped to `1.5.0`.
+
+---
+
+## [1.4.0] — 2026-05-21
 
 ### Added
 
