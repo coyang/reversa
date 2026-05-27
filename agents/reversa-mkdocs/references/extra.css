@@ -1,0 +1,74 @@
+/* MkDocs extra CSS for Reversa-generated documentation */
+
+/* ── Confidence scale badges ─────────────────────────── */
+/* Style for 🟢 / 🟡 / 🔴 markers used throughout Reversa specs */
+
+.confirmed {
+  color: #00c853;
+  font-weight: 600;
+}
+
+.inferred {
+  color: #ffd600;
+  font-weight: 600;
+}
+
+.gap {
+  color: #ff1744;
+  font-weight: 600;
+}
+
+/* ── Mermaid diagram centering ──────────────────────── */
+.mermaid {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+/* ── Admonition customization ────────────────────────── */
+.admonition {
+  font-size: 0.9rem;
+}
+
+/* ── Table styling ───────────────────────────────────── */
+.md-typeset table:not([class]) {
+  font-size: 0.8rem;
+}
+
+.md-typeset table:not([class]) th {
+  white-space: nowrap;
+}
+
+/* ── Code block improvements ─────────────────────────── */
+.md-typeset code {
+  font-size: 0.8rem;
+}
+
+/* ── Print-specific adjustments ──────────────────────── */
+@media print {
+  .md-header {
+    display: none;
+  }
+  .md-sidebar {
+    display: none;
+  }
+  .md-content {
+    margin: 0;
+  }
+  body {
+    font-size: 11pt;
+  }
+}
+
+/* ── Reversa metadata block ──────────────────────────── */
+.reversa-metadata {
+  border-left: 4px solid #7c4dff;
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  background: rgba(124, 77, 255, 0.05);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.reversa-metadata strong {
+  color: #7c4dff;
+}
