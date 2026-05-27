@@ -45,8 +45,8 @@ The user can switch mode mid-run by editing `.reversa/state.json` or by saying `
 1. Read `.reversa/active-requirements.json`
    1.1. If absent, abort with a message pointing to `/reversa-requirements`
 2. Load `requirements.md` from `feature-dir`
-   2.1. If the document still has `[DÚVIDA]` markers, warn the user and ask if they prefer to run `/reversa-clarify` first
-   2.2. If the user confirms they want to proceed even with doubts, each `[DÚVIDA]` becomes an explicit premise in `roadmap.md`, with a visible warning
+   2.1. If the document still has `[DOUBT]` markers, warn the user and ask if they prefer to run `/reversa-clarify` first
+   2.2. If the user confirms they want to proceed even with doubts, each `[DOUBT]` becomes an explicit premise in `roadmap.md`, with a visible warning
 3. Apply `before-plan` hooks in the standard way (same logic as the `reversa-requirements` skill)
 
 ## Technical context collection
@@ -55,10 +55,11 @@ Read the reverse pipeline artifacts in this order, ignoring those that do not ex
 
 1. `_reversa_sdd/architecture.md` (components, internal dependencies)
 2. `_reversa_sdd/c4-context.md` (external boundaries)
-3. `_reversa_sdd/state-machines.md` (affected state machines)
-4. `_reversa_sdd/dependencies.md` (used libraries)
-5. `_reversa_sdd/code-analysis.md`, but only the sections for the components cited in the requirements
-6. `.reversa/principles.md` (mandatory principles)
+3. `_reversa_sdd/c4-code.md` (class-level detail of complex components, if present)
+4. `_reversa_sdd/state-machines.md` (affected state machines)
+5. `_reversa_sdd/dependencies.md` (used libraries)
+6. `_reversa_sdd/code-analysis.md`, but only the sections for the components cited in the requirements
+7. `.reversa/principles.md` (mandatory principles)
 
 Note which files will be touched by the proposed change. This list will become part of `legacy-impact.md` when `/reversa-coding` runs later, so record it as a mental draft.
 
@@ -89,7 +90,7 @@ When the feature does not touch external contracts, omit the `interfaces/` direc
 - Write `roadmap.md` in delta form; never rewrite the entire legacy architecture
 - Cite components from `_reversa_sdd/` by literal name and source file
 - Mark each technical decision with 🟢 / 🟡 / 🔴 according to the confidence in the source
-- If a decision depends on a `[DÚVIDA]` accepted as a premise, use 🟡
+- If a decision depends on a `[DOUBT]` accepted as a premise, use 🟡
 
 ## Persistence
 
@@ -104,7 +105,7 @@ Apply `after-plan` in the standard way.
 
 1. Absolute paths of the generated artifacts
 2. List of conflicting principles, if any
-3. List of premises adopted from unresolved `[DÚVIDA]` markers
+3. List of premises adopted from unresolved `[DOUBT]` markers
 4. Suggested next step: `/reversa-to-do` (or `/reversa-audit` if there is suspicion)
 
 End with:

@@ -36,6 +36,7 @@ The `doc_level` field in state.json controls what to generate:
 | `c4-context.md` | yes | yes | yes |
 | `c4-containers.md` | no | yes | yes |
 | `c4-components.md` | no | yes | yes |
+| `c4-code.md` | no | no | yes (only for the most complex component) |
 | `erd-complete.md` | no (ERD embedded in architecture.md) | yes | yes |
 | `traceability/spec-impact-matrix.md` | no | yes | yes |
 | `deployment.md` | no | no | yes (if there is a Dockerfile, docker-compose or cloud config) |
@@ -57,23 +58,30 @@ The `doc_level` field in state.json controls what to generate:
 - For the most relevant containers
 - Internal components and responsibilities
 
-### 4. Complete ERD
+### 4. C4 Diagram — Code (Level 4, only when necessary)
+- Generate **only if** `doc_level` is `detailed` **and** a component is complex enough to warrant class-level detail (e.g. intricate inheritance, many interrelated classes, or non-obvious design patterns)
+- Target the single most complex component; do not diagram every class in the project
+- Classes, interfaces, key methods and their relationships
+- Use Mermaid classDiagram syntax
+- If no component meets the complexity threshold, skip this level entirely and note the reason in `architecture.md`
+
+### 5. Complete ERD
 - All entities with main attributes
 - Relationships with cardinalities (1:1, 1:N, N:M)
 - Primary and foreign keys
 
-### 5. External integrations
+### 6. External integrations
 - REST/GraphQL APIs consumed and produced
 - Webhooks, events, messages
 - Protocols and data formats
 
-### 6. Technical debt
+### 7. Technical debt
 - Duplicated code
 - Inconsistent patterns
 - Critical outdated dependencies
 - Lack of tests in critical modules
 
-### 7. Spec Impact Matrix
+### 8. Spec Impact Matrix
 Create `_reversa_sdd/traceability/spec-impact-matrix.md`: which component impacts which.
 
 ## Output
@@ -90,6 +98,7 @@ Create `_reversa_sdd/traceability/spec-impact-matrix.md`: which component impact
 
 **Only if `doc_level` is `detailed`:**
 - `_reversa_sdd/deployment.md` — infrastructure and deployment diagram (if Dockerfile, docker-compose or cloud configs are identified)
+- `_reversa_sdd/c4-code.md` — C4 Code (Level 4) class diagram for the most complex component, in Mermaid classDiagram syntax (only if a component is complex enough; otherwise omit and note the reason in `architecture.md`)
 
 ## Confidence scale
 🟢 CONFIRMED | 🟡 INFERRED | 🔴 GAP
