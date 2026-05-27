@@ -64,7 +64,7 @@ Suggest the default currency when known: BR -> BRL, US -> USD, PT -> EUR, MX -> 
 
 ### Question 3: Seniority
 
-Text: "What is the seniority of your work or your team? Choose one: junior, mid, senior, staff_lead, principal. If you prefer, you can answer pleno for mid or especialista for staff_lead."
+Text: "What is the seniority of your work or your team? Choose one: junior, mid, senior, staff_lead, principal. If you prefer, you can answer mid-level for mid or specialist for staff_lead."
 
 Canonical values:
 
@@ -79,8 +79,8 @@ principal
 Aliases:
 
 ```
-pleno -> mid
-especialista -> staff_lead
+mid-level -> mid
+specialist -> staff_lead
 staff -> staff_lead
 lead -> staff_lead
 ```
@@ -94,7 +94,7 @@ Text: "How do you want to provide your hourly rate? Choose one: 1) direct mode, 
 If the user chooses direct:
 
 1. Ask: "What is your net hourly rate in local currency? Just the number."
-2. Record `hourly_rate_mode = "direto"`, `hourly_rate = <value>`, `monthly_target_income = null`, `billable_hours_per_month = null`
+2. Record `hourly_rate_mode = "direct"`, `hourly_rate = <value>`, `monthly_target_income = null`, `billable_hours_per_month = null`
 
 If the user chooses derived:
 
@@ -110,23 +110,23 @@ Text: "What project markup do you want to apply on top of direct cost? You can t
 Validate number between 0 and 200. Shortcuts:
 
 ```
-baixo -> 20
-padrao -> 35
-alto -> 50
+low -> 20
+standard -> 35
+high -> 50
 ```
 
 Record in `margin_percent` for historical compatibility, but explain that the field means project markup, not net accounting margin.
 
 ### Question 6: Tax regime
 
-List regimes from `tax-regimes.md` filtered by country, plus `outro`.
+List regimes from `tax-regimes.md` filtered by country, plus `other`.
 
 Format:
 
 ```
-1. <key>: <name_pt_br> (approximate reserve: <tax_factor * 100>%, source: <tax_factor_source>)
+1. <key>: <name_local> (approximate reserve: <tax_factor * 100>%, source: <tax_factor_source>)
 2. ...
-N. outro: not on the list
+N. other: not on the list
 ```
 
 Validate option number or canonical key.
@@ -136,10 +136,10 @@ If the user answers "I don't know":
 1. Suggest the country's default regime, when one exists
 2. Mark `tax_regime_confidence = "low"`
 
-If they choose `outro`, record:
+If they choose `other`, record:
 
 ```
-tax_regime = "outro"
+tax_regime = "other"
 tax_factor = 0
 tax_factor_kind = "not_computed"
 tax_factor_source = "User reported an uncatalogued regime"
@@ -163,13 +163,13 @@ Mark `tax_regime_confidence = "high"` if the user explicitly chose.
 
 ### Question 7: Pricing models
 
-Text: "Which pricing models do you use? You can choose more than one, separated by commas. Options: escopo_fechado, time_and_materials, sprint, retainer, valor_fixo_por_entrega."
+Text: "Which pricing models do you use? You can choose more than one, separated by commas. Options: fixed_scope, time_and_materials, sprint, retainer, fixed_price_per_delivery."
 
 At least one model is required. Record in `pricing_models`.
 
 ### Question 8: Client profile
 
-Text: "What client profile do you serve? You can choose more than one, separated by commas. Options: microempresa, pequena_empresa, media_empresa, enterprise, governo, cliente_internacional."
+Text: "What client profile do you serve? You can choose more than one, separated by commas. Options: micro_enterprise, small_business, medium_business, enterprise, government, international_client."
 
 Accept empty answer or "skip". In that case, record an empty array.
 

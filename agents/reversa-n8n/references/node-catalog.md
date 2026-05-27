@@ -240,6 +240,6 @@ When the workflow has many steps or is critical, suggest in `design.md`:
 
 ## Final notes
 
-- This catalog covers the most common nodes. If an unknown type appears, register it as INFERIDO in the spec and ask the user for clarification.
+- This catalog covers the most common nodes. If an unknown type appears, register it as INFERRED in the spec and ask the user for clarification.
 - Node versions (`typeVersion`) may change internal parameters. Check whether the `parameters` structure matches the version.
 - Community nodes (starting with `n8n-nodes-<community>`) may not have a direct Python equivalent. Handle on a case-by-case basis.

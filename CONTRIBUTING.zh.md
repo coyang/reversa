@@ -69,7 +69,7 @@ reversa/
 ```
 
 **关键契约**（除非真的清楚后果，否则不要打破）：
-- `state.json` 字段名（`preco_minimo`、`reconhecimento`、`escavacao` …）由 50+ 个 agent 共享，重命名会引发级联失败
+- `state.json` 的阶段字段值（`recognition`、`excavation` …）必须使用英语；旧版葡萄牙语值（`reconhecimento`、`escavacao`）会被自动转换。定价相关的 JSON 键（如 `preco_minimo`）保持不变，由 50+ agent 共享。
 - agent / template 的文件夹与文件名被 prompt 字面引用，重命名需要更新每一处引用
 - `.reversa/` 与 `_reversa_sdd/` 是 agent **唯一允许写入**的路径，绝不要扩大这个范围
 

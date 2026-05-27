@@ -15,9 +15,9 @@ This file persists the complete analysis state between sessions. Reversa reads a
   "autopilot": "full",
   "doc_level": null,
   "output_folder": "_reversa_sdd",
-  "phase": "reconhecimento",
-  "completed": ["reconhecimento"],
-  "pending": ["escavacao", "interpretacao", "geracao", "revisao"],
+  "phase": "recognition",
+  "completed": ["recognition"],
+  "pending": ["excavation", "interpretation", "generation", "revision"],
   "engines": ["claude-code"],
   "agents": ["reversa", "reversa-scout", "reversa-archaeologist"],
   "checkpoints": {
@@ -59,7 +59,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
 | `doc_language` | string | Language for generated specs (e.g., English, Portuguese) |
 | `answer_mode` | string | How the user answers gaps: `chat` or `file` |
 | `autopilot` | string | Auto-continue mode between tasks: `off`, `unit`, or `full` |
-| `doc_level` | string \| null | Volume of generated documentation: `essencial`, `completo`, or `detalhado`. Starts as `null` — must be filled via user choice after the Scout. |
+| `doc_level` | string \| null | Volume of generated documentation: `essential`, `complete`, or `detailed`. Starts as `null` — must be filled via user choice after the Scout. |
 | `output_folder` | string | Specs output folder (default: `_reversa_sdd`) |
 | `phase` | string \| null | Current phase. `null` = not started |
 | `completed` | string[] | Completed phases |
@@ -71,7 +71,7 @@ This file persists the complete analysis state between sessions. Reversa reads a
 
 ## Valid phases
 
-`reconhecimento` → `escavacao` → `interpretacao` → `geracao` → `revisao`
+`recognition` → `excavation` → `interpretation` → `generation` → `revision`
 
 ## Rule for writing
 

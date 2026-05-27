@@ -27,7 +27,7 @@ market_max = horas_max[complexity_class][seniority] * max_hourly
 `pricing_model` only changes the presentation:
 
 - `time_and_materials`: show hourly rate and estimated total per hours
-- `escopo_fechado`, `sprint`, `valor_fixo_por_entrega`: show total per feature derived from hours
+- `fixed_scope`, `sprint`, `fixed_price_per_delivery`: show total per feature derived from hours
 - `retainer`: show "equivalent range per feature inside the retainer"
 
 `client_profile` does not change the number in v2. Without a per-profile dataset, per-client multipliers would be made up. estimate.md may add a qualitative warning for micro-enterprise, small business or enterprise.
@@ -60,8 +60,8 @@ market_max = horas_max[complexity_class][seniority] * max_hourly
 ## Seniority aliases
 
 ```
-pleno -> mid
-especialista -> staff_lead
+mid-level -> mid
+specialist -> staff_lead
 staff -> staff_lead
 lead -> staff_lead
 ```
@@ -81,7 +81,7 @@ lead -> staff_lead
 
 1. If `country` is not in the table, Market becomes `unavailable: true`
 2. If `seniority` comes as an alias, normalize and compute
-3. If `pricing_model` is not among the known models, use the `escopo_fechado` presentation and log fallback
+3. If `pricing_model` is not among the known models, use the `fixed_scope` presentation and log fallback
 4. `client_profile` does not change price in v2
 5. `complexity_class` must always exist in size; if missing, fail with a message asking for Sizer recompute
 

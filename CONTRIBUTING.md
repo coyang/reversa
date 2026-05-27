@@ -69,7 +69,7 @@ reversa/
 ```
 
 **Important contracts** (do not break unless you really know what you are doing):
-- `state.json` field names (`preco_minimo`, `reconhecimento`, `escavacao`, …) are shared by 50+ agents. Renaming any of them cascades.
+- `state.json` phase field values (`recognition`, `excavation`, …) — use the English forms; legacy Portuguese values (`reconhecimento`, `escavacao`) are auto-converted. Pricing-related JSON keys like `preco_minimo` remain as-is, shared by 50+ agents.
 - File / folder names of agents and templates are referenced literally inside prompts. Renaming requires updating every reference.
 - `.reversa/` and `_reversa_sdd/` are the **only** paths agents are allowed to write to. Never widen this.
 

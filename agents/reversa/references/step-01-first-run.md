@@ -51,7 +51,7 @@ Check if `.reversa/plan.md` already exists:
 ## 6. State update
 
 After plan approval, update `.reversa/state.json`:
-- `phase`: `"reconhecimento"`
+- `phase`: `"recognition"`
 - Save any information collected in this step that is not yet in the file
 
 See `references/checkpoint-guide.md` for the rules on writing to state.json.

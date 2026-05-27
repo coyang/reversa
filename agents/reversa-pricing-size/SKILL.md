@@ -51,7 +51,7 @@ You are the REVERSA feature sizer. Your mission is to read the forward cycle art
 | Metric | Expected file | Accepted alternatives |
 |---|---|---|
 | Requirements | `requirements.md` | none |
-| Doubts | `doubts.md` | `duvidas.md`, section `## Esclarecimentos` in `requirements.md` |
+| Doubts | `doubts.md` | section `## Clarifications` in `requirements.md` |
 | Plan | `plan.md` | `roadmap.md` |
 | Tasks | `tasks.md` | `to-do.md`, `actions.md` |
 
@@ -80,19 +80,19 @@ If `<output_folder>/_pricing/<feature>/size.json` exists:
 
 1. Count list items or question headings in `doubts.md`
 2. Severity:
-   - alta or high -> `high`
-   - media or medium -> `medium`
-   - baixa or low -> `low`
+   - `high` or high -> `high`
+   - `medium` or medium -> `medium`
+   - `low` or low -> `low`
 3. Without severity, fill only `total`
 
 ### Tasks
 
 1. Count items starting with `- `, `* `, `1. `, or `- [ ]`
 2. Breakdown by keyword:
-   - `new`: criar, adicionar, novo, implementar
-   - `modify`: modificar, alterar, ajustar, refatorar
-   - `delete`: remover, deletar, excluir
-   - `test`: teste, test, verificar, validar
+   - `new`: create, add, new, implement
+   - `modify`: modify, alter, adjust, refactor
+   - `delete`: remove, delete, exclude
+   - `test`: test, verify, validate
    - `infra`: deploy, ci, pipeline, config, infra
 3. Priority if multiple types apply: `test > infra > delete > modify > new`
 

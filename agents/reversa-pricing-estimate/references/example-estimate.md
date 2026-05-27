@@ -64,7 +64,7 @@ Warning: part of the tax factor may be tax listed separately and passed on to th
 | Item | Value |
 |---|---|
 | Country / Seniority | Brazil / senior |
-| Model / Client profile | escopo_fechado / pequena_empresa |
+| Model / Client profile | fixed_scope / small_business |
 | Complexity | L |
 | Market hourly rate | 100.00 to 200.00 BRL/h |
 | Source kind | salary_derived_freelance_estimate |

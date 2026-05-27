@@ -150,15 +150,15 @@ Stage detection is by **physical artifacts of the feature**, never by self-decla
 
    | Observed condition in `feature-dir` | Physical stage |
    |--------------------------------------|----------------|
-   | `requirements.md` absent | `vazio` |
+   | `requirements.md` absent | `empty` |
    | `requirements.md` present, `roadmap.md` absent | `requirements` |
    | `roadmap.md` present, `actions.md` absent | `plan` |
-   | `actions.md` present with at least one line `\| ... \| \[ \] \|` (open checkbox) | `coding-em-progresso` |
+   | `actions.md` present with at least one line `\| ... \| \[ \] \|` (open checkbox) | `coding-in-progress` |
    | `actions.md` present, ALL action lines as `\| ... \| \[X\] \|` (closed checkboxes) | `done` |
 
 3. For the count in `actions.md`, consider only table lines ending with `\| [ ] \|` or `\| [X] \|`. Headers and free text are ignored
-4. For `requirements`, also count `[DÚVIDA]` markers in `requirements.md` (useful for deciding between clarify and plan)
-5. For `coding-em-progresso`, count `[X]` versus `[ ]` actions in `actions.md`
+4. For `requirements`, also count `[DOUBT]` markers in `requirements.md` (useful for deciding between clarify and plan)
+5. For `coding-in-progress`, count `[X]` versus `[ ]` actions in `actions.md`
 6. Also consider the `paused-features` field in `active-requirements.json` (if it exists and has entries, there are paused features available for resumption)
 
 ## Routing matrix
@@ -169,14 +169,14 @@ The next skill is decided by the combination of physical stage and the free argu
 |--------|--------------------------|--------------------------------|
 | No active feature | Yes | `/reversa-requirements <argument>` |
 | No active feature | No | Present the pipeline, ask for a feature description, suggest `/reversa-requirements <description>` |
-| Stage `vazio` (folder without `requirements.md`) | Indifferent | `/reversa-requirements` (recreate from scratch, communicate that the current folder is corrupted) |
-| Stage `requirements` with `[DÚVIDA]` | Indifferent | `/reversa-clarify` |
-| Stage `requirements` without `[DÚVIDA]` | Indifferent | `/reversa-plan` |
+| Stage `empty` (folder without `requirements.md`) | Indifferent | `/reversa-requirements` (recreate from scratch, communicate that the current folder is corrupted) |
+| Stage `requirements` with `[DOUBT]` | Indifferent | `/reversa-clarify` |
+| Stage `requirements` without `[DOUBT]` | Indifferent | `/reversa-plan` |
 | Stage `plan` | Indifferent | `/reversa-to-do` |
-| Stage `coding-em-progresso` | Indifferent | `/reversa-coding` |
+| Stage `coding-in-progress` | Indifferent | `/reversa-coding` |
 | Stage `done` | Indifferent | Completion, offer `/reversa-resume` if `paused-features` has entries, or suggest `/reversa-requirements` for a new feature |
 
-**Important:** if the user passed a free argument AND there is an active feature in a stage other than `done` or `vazio`, do NOT replicate the "continue / parallel / abandon" menu here. Only communicate the ambiguity and offer the two ways out, without deciding:
+**Important:** if the user passed a free argument AND there is an active feature in a stage other than `done` or `empty`, do NOT replicate the "continue / parallel / abandon" menu here. Only communicate the ambiguity and offer the two ways out, without deciding:
 
 > There is an active feature (`<NNN-short-name>`, stage `<stage>`), and you also passed a description of a new idea.
 >
@@ -190,7 +190,7 @@ Wait for the choice. Do not decide on your own.
 `/reversa-audit` and `/reversa-quality` are optional and are not part of the happy path in the routing above. You only suggest them when:
 
 1. The user explicitly asks
-2. You detect signs of inconsistency when reading the artifacts (for example, `requirements.md` has `[DÚVIDA]` but `roadmap.md` has already decided on the doubtful point, or `actions.md` references components absent in `_reversa_sdd/`)
+2. You detect signs of inconsistency when reading the artifacts (for example, `requirements.md` has `[DOUBT]` but `roadmap.md` has already decided on the doubtful point, or `actions.md` references components absent in `_reversa_sdd/`)
 
 When applicable, suggest as an intermediate step before the next mandatory skill, leaving the decision to the user.
 
@@ -216,12 +216,12 @@ Use exactly this format (replacing placeholders with real values):
 
 - **No active feature, no argument:** list the pipeline agents with one line per agent (`reversa-requirements`, `reversa-clarify`, `reversa-plan`, `reversa-to-do`, `reversa-audit`, `reversa-quality`, `reversa-coding`) and ask: "Describe in one sentence the feature you want to build."
 - **No active feature, with argument:** show the argument in quotes and say it will be the starting point for `/reversa-requirements`.
-- **Stage `requirements` with N `[DÚVIDA]` markers:** say "`requirements.md` has `<N>` open point(s), worth running `/reversa-clarify` before the plan."
-- **Stage `requirements` without `[DÚVIDA]`:** say "`requirements.md` is closed, ready for the plan."
+- **Stage `requirements` with N `[DOUBT]` markers:** say "`requirements.md` has `<N>` open point(s), worth running `/reversa-clarify` before the plan."
+- **Stage `requirements` without `[DOUBT]`:** say "`requirements.md` is closed, ready for the plan."
 - **Stage `plan`:** say "`roadmap.md` is ready, it needs to be decomposed into atomic actions."
-- **Stage `coding-em-progresso`:** say "`<N>` of `<M>` actions completed in `actions.md`, coding in progress."
+- **Stage `coding-in-progress`:** say "`<N>` of `<M>` actions completed in `actions.md`, coding in progress."
 - **Stage `done`:** say "All actions are closed. If you want, resume a paused feature with `/reversa-resume` or start another with `/reversa-requirements <description>`."
-- **Stage `vazio` (folder without `requirements.md`):** say "The `feature-dir` in `active-requirements.json` exists but has no `requirements.md`. Recommended to restart with `/reversa-requirements`."
+- **Stage `empty` (folder without `requirements.md`):** say "The `feature-dir` in `active-requirements.json` exists but has no `requirements.md`. Recommended to restart with `/reversa-requirements`."
 
 If there are `paused-features` with entries, in any state, add a line:
 

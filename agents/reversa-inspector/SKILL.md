@@ -105,7 +105,7 @@ List flows that need Gherkin coverage:
 
 - Flows covered by `characterization_specs/` (if it exists): adapt.
 - Critical flows identified in `code-analysis.md` or `sequences/`.
-- Flows derived from `BR-MIGRAR-XXX` rules marked as critical.
+- Flows derived from `BR-MIGRATE-XXX` rules marked as critical.
 
 For each flow, generate a file `parity_tests/<NN>-<short-name>.feature` using the template in `references/templates/parity_test.feature`.
 

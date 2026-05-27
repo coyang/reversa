@@ -14,7 +14,7 @@ Reversa is the only agent that **writes** to state.json. All other agents only r
 ### When starting a phase
 ```json
 {
-  "phase": "reconhecimento"
+  "phase": "recognition"
 }
 ```
 
@@ -37,9 +37,9 @@ Reversa is the only agent that **writes** to state.json. All other agents only r
 ### When an entire phase completes
 ```json
 {
-  "phase": "escavacao",
-  "completed": ["reconhecimento"],
-  "pending": ["escavacao", "interpretacao", "geracao", "revisao"]
+  "phase": "excavation",
+  "completed": ["recognition"],
+  "pending": ["excavation", "interpretation", "generation", "revision"]
 }
 ```
 
@@ -58,7 +58,7 @@ Reversa is the only agent that **writes** to state.json. All other agents only r
 ## Phase sequence
 
 ```
-null → reconhecimento → escavacao → interpretacao → geracao → revisao
+null → recognition → excavation → interpretation → generation → revision
 ```
 
 When moving between phases:
@@ -76,9 +76,9 @@ When moving between phases:
   "doc_language": "English",
   "answer_mode": "chat",
   "output_folder": "_reversa_sdd",
-  "phase": "escavacao",
-  "completed": ["reconhecimento"],
-  "pending": ["escavacao", "interpretacao", "geracao", "revisao"],
+  "phase": "excavation",
+  "completed": ["recognition"],
+  "pending": ["excavation", "interpretation", "generation", "revision"],
   "checkpoints": {
     "scout": {
       "completed_at": "2026-04-26T10:30:00Z",

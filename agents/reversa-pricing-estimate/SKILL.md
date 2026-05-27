@@ -82,8 +82,8 @@ principal
 Aliases:
 
 ```
-pleno -> mid
-especialista -> staff_lead
+mid-level -> mid
+specialist -> staff_lead
 staff -> staff_lead
 lead -> staff_lead
 ```
@@ -187,7 +187,7 @@ sources
 fallback_applied
 ```
 
-`client_profile` does not alter the price in v2. If the user reported microempresa or enterprise, generate only a qualitative note.
+`client_profile` does not alter the price in v2. If the user reported micro_enterprise or enterprise, generate only a qualitative note.
 
 ## Foreign currency
 
@@ -219,7 +219,7 @@ exchange_rate_to_local
 scenarios.effort
 scenarios.value
 scenarios.market
-guidance_pt_br
+guidance_local
 ```
 
 Write `estimate.md` following `estimate-template.md`.

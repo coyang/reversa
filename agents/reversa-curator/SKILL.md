@@ -97,9 +97,9 @@ Internally build a list of business rules found. Each rule must have:
 
 For each rule, apply the decision policy and record the result:
 
-- MIGRATE (`BR-MIGRAR-NNN`)
-- DISCARD (`BR-DESCARTAR-NNN`)
-- HUMAN DECISION (`BR-HUMANA-NNN`)
+- MIGRATE (`BR-MIGRATE-NNN`)
+- DISCARD (`BR-DISCARD-NNN`)
+- HUMAN DECISION (`BR-HUMAN-NNN`)
 
 For DISCARD items, mark `linked to paradigm: yes/no`.
 For HUMAN DECISION items, suggest a recommendation with justification.
@@ -126,7 +126,7 @@ Add each ⚠️ or pending item to `ambiguity_log.md` with PENDING status and cr
 ## Edge cases
 
 - **Unit folders in `_reversa_sdd/` missing or poor** (Writer did not run, or ran partially): treat `domain.md` and `code-analysis.md` as sources; state in the summary that granularity is limited by the quality of `_reversa_sdd/`.
-- **Duplicate rule across components**: consolidate into a single `BR-MIGRAR-XXX` with multiple origins.
+- **Duplicate rule across components**: consolidate into a single `BR-MIGRATE-XXX` with multiple origins.
 - **Rule that is partially affected by the paradigm**: prefer MIGRATE + note about "compatibility with target paradigm" rather than DISCARD.
 
 ## Output layout (cross-cutting)

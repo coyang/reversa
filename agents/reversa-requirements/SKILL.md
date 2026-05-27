@@ -67,34 +67,34 @@ Before creating a new feature, check if there is already a previous one in progr
 
    | Observed condition | Physical stage |
    |--------------------|----------------|
-   | `requirements.md` absent | `vazio` |
+   | `requirements.md` absent | `empty` |
    | `requirements.md` present, `roadmap.md` absent | `requirements` |
    | `roadmap.md` present, `actions.md` absent | `plan` |
-   | `actions.md` present with at least one line `\| ... \| \[ \] \|` (open checkbox) | `coding-em-progresso` |
+   | `actions.md` present with at least one line `\| ... \| \[ \] \|` (open checkbox) | `coding-in-progress` |
    | `actions.md` present, ALL action lines as `\| ... \| \[X\] \|` (closed checkboxes) | `done` |
 
-4. Consider the previous feature **in progress** when the physical stage is ANY value other than `done` and `vazio`. That is:
-   4.1. `requirements`, `plan`, or `coding-em-progresso` -> in progress
+4. Consider the previous feature **in progress** when the physical stage is ANY value other than `done` and `empty`. That is:
+   4.1. `requirements`, `plan`, or `coding-in-progress` -> in progress
    4.2. `done` -> completed, treat as absent, overwrite when creating a new one
-   4.3. `vazio` -> corruption, `feature-dir` exists but without `requirements.md`, treat as absent
+   4.3. `empty` -> corruption, `feature-dir` exists but without `requirements.md`, treat as absent
 5. If it is in progress, register internally for use in the next section:
    5.1. Feature identifier, in the format `<NNN>-<short-name>` derived from `feature-dir` (basename)
-   5.2. Detected physical stage, value among `requirements`, `plan`, `coding-em-progresso`
-   5.3. For `coding-em-progresso`, count how many `[X]` actions versus how many `[ ]` in `actions.md`; this helps the user decide
+   5.2. Detected physical stage, value among `requirements`, `plan`, `coding-in-progress`
+   5.3. For `coding-in-progress`, count how many `[X]` actions versus how many `[ ]` in `actions.md`; this helps the user decide
 6. For the checkbox count in `actions.md`, consider only table lines ending with `\| [ ] \|` or `\| [X] \|`. Headers and free-text lines are ignored.
 
 The policy for what to do when there is a feature in progress is described in the next section "Re-execution policy".
 
 ## Re-execution policy
 
-If detection identified a previous feature in progress (physical stage in `requirements`, `plan`, or `coding-em-progresso`), **always ask the user** before any writing. There is no automatic default; the goal is to eliminate surprises.
+If detection identified a previous feature in progress (physical stage in `requirements`, `plan`, or `coding-in-progress`), **always ask the user** before any writing. There is no automatic default; the goal is to eliminate surprises.
 
 Present the block below to the user:
 
 > There is already a feature in progress:
 > - Identifier: `<NNN>-<short-name>`
 > - Detected stage: `<physical stage>`
-> - Progress (only for `coding-em-progresso`): `<N>` of `<M>` actions completed
+> - Progress (only for `coding-in-progress`): `<N>` of `<M>` actions completed
 >
 > How do you want to proceed?
 >
@@ -111,9 +111,9 @@ Wait for the response. Do NOT choose on your own; do NOT interpret silence as co
 1. Do not write to `active-requirements.json`
 2. Do not create a new folder in `_reversa_forward/`
 3. Suggest to the user the next appropriate skill for the physical stage:
-   3.1. `requirements` -> `/reversa-clarify` (if there are `[DÚVIDA]` markers in `requirements.md`) or `/reversa-plan`
+   3.1. `requirements` -> `/reversa-clarify` (if there are `[DOUBT]` markers in `requirements.md`) or `/reversa-plan`
    3.2. `plan` -> `/reversa-to-do`
-   3.3. `coding-em-progresso` -> `/reversa-coding` (can receive a free argument restricting scope, e.g., "T010-T015")
+   3.3. `coding-in-progress` -> `/reversa-coding` (can receive a free argument restricting scope, e.g., "T010-T015")
 4. End this skill with a clear message stating that nothing was written; do NOT execute the next sections
 
 ### Option 2, create a new one in parallel
@@ -131,7 +131,7 @@ Wait for the response. Do NOT choose on your own; do NOT interpret silence as co
   "current-stage": "<current value of the field, even as informative metadata>",
   "stages-completed": [],
   "paused-at": "<ISO 8601 of current time>",
-  "paused-from-stage": "<detected physical stage: requirements | plan | coding-em-progresso>"
+  "paused-from-stage": "<detected physical stage: requirements | plan | coding-in-progress>"
 }
 ```
 
@@ -193,8 +193,8 @@ Identify the relevant files. Each citation within the requirements must point to
 1. Load the template at `.reversa/templates/requirements-template.md`
 2. Preserve the order of mandatory sections
 3. Fill in each section respecting the inline guiding comment
-4. Mark with `[DÚVIDA]` any point where information is missing or ambiguous
-5. Limit the total number of `[DÚVIDA]` markers to a maximum of three in the initial document
+4. Mark with `[DOUBT]` any point where information is missing or ambiguous
+5. Limit the total number of `[DOUBT]` markers to a maximum of three in the initial document
    5.1. Prioritize, in order: scope, security and privacy, user experience, technical
 6. Use the 🟢 / 🟡 / 🔴 markers on items according to the confidence of the original source
 
@@ -225,9 +225,9 @@ At the end of execution, show the user:
 
 1. Absolute path of `feature-dir`
 2. Absolute path of `requirements.md`
-3. Number of `[DÚVIDA]` markers in the document
+3. Number of `[DOUBT]` markers in the document
 4. Suggested next step:
-   4.1. If there are `[DÚVIDA]`, suggest `/reversa-clarify`
+   4.1. If there are `[DOUBT]`, suggest `/reversa-clarify`
    4.2. Otherwise, suggest `/reversa-plan`
 
 Always end with:

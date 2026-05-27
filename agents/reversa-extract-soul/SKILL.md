@@ -31,7 +31,7 @@ This skill is part of the Discovery Team (Reversa Core), but **it does not enter
 
 ## Before you start
 
-1. Read `.reversa/state.json`, especially: `output_folder` (default `_reversa_sdd`), `doc_level` (default `completo`), `doc_language`, `user_name`.
+1. Read `.reversa/state.json`, especially: `output_folder` (default `_reversa_sdd`), `doc_level` (default `complete`), `doc_language`, `user_name`.
 2. Use `output_folder` in all write operations.
 
 ## Mandatory prerequisite
@@ -60,7 +60,7 @@ Never delete or rewrite the original `soul.md` without the user's explicit confi
 
 `doc_level` controls the depth of the Spec. Always 1 file (`soul.md`), never multiple.
 
-| Aspect | essencial | completo | detalhado |
+| Aspect | essential | complete | detailed |
 |---------|-----------|----------|-----------|
 | Core entities | 5 | 7 to 8 | up to 10 |
 | Founding decisions | 3 | 4 to 5 | 5 to 7 |
@@ -134,9 +134,9 @@ List 5 to 10 entities (per `doc_level`), each with:
 
 #### Diagram
 
-In `essencial`: textual list in the format `EntityA --1:N--> EntityB`.
+In `essential`: textual list in the format `EntityA --1:N--> EntityB`.
 
-In `completo` and `detalhado`: lean Mermaid `erDiagram` or `classDiagram` block, only with the identified core entities. No detailed attributes (that is Architect's job).
+In `complete` and `detailed`: lean Mermaid `erDiagram` or `classDiagram` block, only with the identified core entities. No detailed attributes (that is Architect's job).
 
 ### 3. Founding decisions
 

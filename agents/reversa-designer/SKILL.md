@@ -168,7 +168,7 @@ In `target_domain_model.md`:
 - Aggregates with root, invariants, commands, published events (if event-driven).
 - Entities, value objects.
 - Domain events (mandatory if target paradigm is event-driven or hybrid).
-- "Domain rules" table mapping each `BR-MIGRAR-XXX` to its location in the new domain.
+- "Domain rules" table mapping each `BR-MIGRATE-XXX` to its location in the new domain.
 - "Legacy traceability" table with mapping type (1-to-1, merged, split, new).
 
 #### 11. Model data

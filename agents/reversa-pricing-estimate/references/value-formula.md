@@ -20,7 +20,7 @@ The 10% to 30% range is a Reversa commercial heuristic for B2B/freelance/agency.
 ```
 if monthly_return_declared == 0 AND cost_of_not_doing == 0:
   available = false
-  explanation_pt_br = "Value scenario cannot be calculated: client did not declare measurable return."
+  explanation = "Value scenario cannot be calculated: client did not declare measurable return."
 ```
 
 `users_impacted` is commercial context. It appears in estimate.md, but does not enter the v2 numeric calculation.

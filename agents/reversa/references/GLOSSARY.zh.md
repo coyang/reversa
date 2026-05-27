@@ -117,8 +117,8 @@
 
 | English | 中文 | 说明 |
 |---------|------|------|
-| functional requirement | 功能需求 | 缩写 RF（Requisito Funcional） |
-| non-functional requirement | 非功能需求 | 缩写 RNF（Requisito Não Funcional） |
+| functional requirement | 功能需求 | 缩写 RF（Functional Requirement） |
+| non-functional requirement | 非功能需求 | 缩写 RNF（Non-Functional Requirement） |
 | acceptance criterion | 验收标准 | |
 | business rule | 业务规则 | |
 | edge case | 边界情况 | 缩写 EC |

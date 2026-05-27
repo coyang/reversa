@@ -37,8 +37,8 @@
 
 | Field | Value |
 |---|---|
-| Pricing models | escopo_fechado, time_and_materials |
-| Client profile | pequena_empresa |
+| Pricing models | fixed_scope, time_and_materials |
+| Client profile | small_business |
 | Foreign currency billing | No |
 
 ## Disclaimer

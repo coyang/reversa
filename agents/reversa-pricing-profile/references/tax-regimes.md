@@ -8,13 +8,13 @@ Each regime has:
 
 - `key`: canonical key recorded in `profile.json`
 - `country`: ISO 3166-1 alpha-2 code or `INTL`
-- `name_pt_br`: friendly name used in chat
+- `name_local`: friendly name used in chat
 - `tax_factor`: approximate factor applied over direct cost
 - `tax_factor_kind`: `effective_reserve_estimate`, `statutory_proxy` or `not_computed`
 - `includes_vat`: whether it combines income/contribution tax with VAT/IVA/ISS separately listed
 - `vat_pass_through_warning`: whether the estimate should warn that part of the tax may be passed on to the client
 - `tax_factor_source`: public source or description of the basis
-- `notes_pt_br`: short note for the user
+- `notes_local`: short note for the user
 
 ## Mandatory disclaimer
 
@@ -24,7 +24,7 @@ The agent must repeat the disclaimer during the interview and in the footer of `
 
 ## Brazil (BR)
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
 | MEI | Individual Microentrepreneur (MEI) | 0.06 | effective_reserve_estimate | true | true | Portal do Empreendedor and public rules of the DAS-MEI | Simplified reserve. MEI usually has a fixed DAS and revenue limit. Software activity may require classification validation. |
 | simples_servicos | Simples Nacional, IT services | 0.15 | effective_reserve_estimate | true | true | Receita Federal, Simples Nacional, annexes and factor R | Average reserve. Real rate depends on annex, RBT12, factor R, ISS and withholdings. |
@@ -33,37 +33,37 @@ The agent must repeat the disclaimer during the interview and in the footer of `
 
 ## United States (US)
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
 | self_employed_1099 | Self-Employed, 1099, sole proprietor | 0.30 | effective_reserve_estimate | false | false | IRS, self-employment tax and federal income tax | Combined reserve. Does not include state tax or specific deductions. |
 | s_corp_llc | S-Corp or LLC with S-Corp election | 0.22 | effective_reserve_estimate | false | false | IRS, payroll tax, reasonable salary and distributions | Simplified reserve. Requires accountant for reasonable salary and distributions. |
 
 ## Portugal (PT)
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
 | pt_simplificado | Category B, simplified regime | 0.21 | effective_reserve_estimate | true | true | Autoridade Tributaria, IRS Categoria B, IVA and Seguranca Social | Combined reserve. IVA may be listed separately and passed on to the client. |
 | pt_organizada | Category B, organized accounting | 0.18 | effective_reserve_estimate | true | true | Autoridade Tributaria, organized accounting | Simplified reserve. Real costs may reduce the taxable base. |
 
 ## Mexico (MX)
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
 | mx_resico | Regimen Simplificado de Confianza (RESICO) | 0.10 | effective_reserve_estimate | true | true | SAT, RESICO PF and IVA | Combined reserve. ISR may be low, but IVA may apply depending on the case. |
 | mx_actividad_empresarial | Actividad Empresarial y Profesional (PF) | 0.20 | effective_reserve_estimate | true | true | SAT, progressive ISR and IVA | Simplified reserve for independent professional. |
 
 ## International (INTL)
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
 | intl_freelance_no_withhold | International freelance, client without withholding | 0.00 | not_computed | false | false | Depends on the provider's country | Client pays gross. Use the provider's national regime for actual tax. |
 | intl_freelance_with_withhold | International freelance, client withholds at source | 0.15 | effective_reserve_estimate | false | false | Bilateral treaties and local rules | Actual withholding depends on treaty and client's country. |
 
 ## Other
 
-| key | name_pt_br | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_pt_br |
+| key | name_local | tax_factor | tax_factor_kind | includes_vat | vat_pass_through_warning | tax_factor_source | notes_local |
 |---|---|---:|---|---|---|---|---|
-| outro | Other regime, not listed | 0.00 | not_computed | false | false | User reported a regime not in the catalog | Tax not computed. The estimate must warn that the calculation is left to the accountant. |
+| other | Other regime, not listed | 0.00 | not_computed | false | false | User reported a regime not in the catalog | Tax not computed. The estimate must warn that the calculation is left to the accountant. |
 
 ## Essential regimes for future regions
 
