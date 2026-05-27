@@ -72,7 +72,23 @@ Execute the plan tasks **sequentially, one at a time**:
 
 2. **🛑 Blocking checkpoint — do not proceed to Archaeologist without the user's response.**
 
-Present the user with a summary of what the Scout found and the three documentation level options. Use exactly this format:
+Read `doc_level` from `.reversa/state.json`.
+
+**If `doc_level` is already set** (installed via CLI): present only the Scout summary and ask for approval before proceeding.
+
+> "[Name], Scout has completed the mapping. Here is what I found:
+> - **[N] modules** identified: [brief list]
+> - **Main language:** [language]
+> - **[N] external integrations** detected (or: none)
+> - **Database:** [present/absent]
+>
+> The documentation level was configured during installation: **`[doc_level]`**.
+>
+> Do you approve proceeding with this level? (Y/n)"
+
+If the user enters 'n' or 'no', ask which level they want instead and save it in `.reversa/state.json` → field `doc_level`.
+
+**If `doc_level` is not set** (null or empty): present the full menu including the three documentation level options. Use exactly this format:
 
 > "[Name], Scout has completed the mapping. Here is what I found:
 > - **[N] modules** identified: [brief list]
