@@ -6,7 +6,7 @@
   "doc_language": "中文",
   "answer_mode": "chat",
   "autopilot": "full",
-  "doc_level": "complete",
+  "doc_level": null,
   "output_folder": "_reversa_sdd",
   "forward_folder": "_reversa_forward",
   "phase": null,
